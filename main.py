@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from form import Application
+from form import CoverForm, AgreementForm, ChecklistForm, PersonalInformationForm, ShortEssayForm, AutobiographicalForm, ScaleOMatic
 app = Flask(__name__)
 
 app.secret_key = "maria"
@@ -7,7 +7,20 @@ app.secret_key = "maria"
 
 @app.route('/')
 def index():
-    form = Application()
+    cover = CoverForm()
+    agreement = AgreementForm()
+    checklist = ChecklistForm()
+    personal = PersonalInformationForm()
+    short= ShortEssayForm()
+    auto = AutobiographicalForm()
+    range = ScaleOMatic()
+    form = {"cover":cover,
+            "agreement":agreement,
+            "checklist":checklist,
+            "personal":personal,
+            "short":short,
+            "auto":auto,
+            "range": range}
     return render_template("index.html", form=form)
 
 
