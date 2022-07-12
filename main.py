@@ -15,12 +15,14 @@ def index():
     auto = AutobiographicalForm()
     range = ScaleOMatic()
     form = {"cover":cover,
-            "agreement":agreement,
-            "checklist":checklist,
-            "personal":personal,
-            "short":short,
-            "auto":auto,
+            "agreement": agreement,
+            "checklist": checklist,
+            "personal": personal,
+            "short": short,
+            "auto": auto,
             "range": range}
+
+
     return render_template("index.html", form=form)
 
 

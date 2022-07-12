@@ -1,5 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, DateTimeField, IntegerField, SelectField, DateField, TextAreaField, IntegerRangeField
+from wtforms import StringField, FieldList, SubmitField, \
+                    BooleanField, DateTimeField, \
+                    IntegerField, SelectField, \
+                    DateField, TextAreaField, IntegerRangeField, Form, FormField
 from wtforms.validators import DataRequired, Length, Email
 # from wtforms.fields import DateTimeLocalField
 
@@ -127,43 +130,135 @@ class AutobiographicalForm(FlaskForm):
                                     " or drawings."
                                     "If you are submitting a non-written autobiographical statement or if your statement does not fit"
                                     "below, please email it as a .doc, .Jpeg or .pdf file.", render_kw={"rows": "12", "cols": "150"})
-
+    # print(question1)
 class ScaleOMatic(FlaskForm):
 
-    range1 = IntegerRangeField(render_kw = {"min": 0,
-                                            "max": 10,
-                                            "step": 1,
-                                            "style": "width:600px;",
-                                            "oninput":"amount.value=range1.value" })
-    # input1 = IntegerField(render_kw={"id": "amount",
-    #                                  "type": "number",
-    #                                  "value": "5",
-    #                                  "min": "0",
-    #                                  "max": "200",
-    #                                  "oninput":'range1.value=amount.value'})
+        range1 = IntegerRangeField(label="range",render_kw={'id':"range1",
+                                                "min": 0,
+                                                "max": 10,
+                                                "step": 1,
+                                                "style": "width:600px;",
+                                                "oninput": f"amount1.value=range1.value" })
 
-    comment1 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+        input1 = IntegerField(render_kw={"id": f"amount1",
+                                         "type": "number",
+                                         "value": "5",
+                                         "min": "0",
+                                         "max": "200",
+                                         "oninput": f'range1.value=amount1.value'})
+        comment1 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
-    # range2 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
-    # comment2 = StringField("Comments:",render_kw={"placeholder":"Comments"})
-    #
-    # range3 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
-    # comment3 = StringField("Comments:",render_kw={"placeholder":"Comments"})
-    #
-    # range4 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
-    # comment4 = StringField("Comments:",render_kw={"placeholder":"Comments"})
-    #
-    # range5 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
-    # comment5 = StringField("Comments:",render_kw={"placeholder":"Comments"})
-    #
-    # range6 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
-    # comment6 = StringField("Comments:",render_kw={"placeholder":"Comments"})
-    #
-    # range7 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
-    # comment7 = StringField("Comments:",render_kw={"placeholder":"Comments"})
-    #
-    # range8 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
-    # comment8 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+        range2 = IntegerRangeField(label="range",render_kw={'id':"range2",
+                                                "min": 0,
+                                                "max": 10,
+                                                "step": 1,
+                                                "style": "width:600px;",
+                                                "oninput": f"amount2.value=range2.value" })
+
+        input2 = IntegerField(render_kw={"id": f"amount2",
+                                         "type": "number",
+                                         "value": "5",
+                                         "min": "0",
+                                         "max": "200",
+                                         "oninput": f'range2.value=amount2.value'})
+        comment2 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+
+
+
+        range3 = IntegerRangeField(label="range",render_kw={'id':"range3",
+                                                "min": 0,
+                                                "max": 10,
+                                                "step": 1,
+                                                "style": "width:600px;",
+                                                "oninput": f"amount3.value=range3.value" })
+
+        input3 = IntegerField(render_kw={"id": f"amount3",
+                                         "type": "number",
+                                         "value": "5",
+                                         "min": "0",
+                                         "max": "200",
+                                         "oninput": f'range3.value=amount3.value'})
+        comment3 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+
+
+
+        range4 = IntegerRangeField(label="range",render_kw={'id':"range4",
+                                                "min": 0,
+                                                "max": 10,
+                                                "step": 1,
+                                                "style": "width:600px;",
+                                                "oninput": f"amount4.value=range4.value" })
+
+        input4 = IntegerField(render_kw={"id": f"amount4",
+                                         "type": "number",
+                                         "value": "5",
+                                         "min": "0",
+                                         "max": "200",
+                                         "oninput": f'range4.value=amount4.value'})
+        comment4 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+
+
+
+        range5 = IntegerRangeField(label="range",render_kw={'id':"range5",
+                                                "min": 0,
+                                                "max": 10,
+                                                "step": 1,
+                                                "style": "width:600px;",
+                                                "oninput": f"amount5.value=range5.value" })
+
+        input5 = IntegerField(render_kw={"id": f"amount5",
+                                         "type": "number",
+                                         "value": "5",
+                                         "min": "0",
+                                         "max": "200",
+                                         "oninput": f'range5.value=amount5.value'})
+        comment5 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+
+        range6 = IntegerRangeField(label="range",render_kw={'id':"range6",
+                                                "min": 0,
+                                                "max": 10,
+                                                "step": 1,
+                                                "style": "width:600px;",
+                                                "oninput": f"amount6.value=range6.value" })
+
+        input6 = IntegerField(render_kw={"id": f"amount6",
+                                         "type": "number",
+                                         "value": "5",
+                                         "min": "0",
+                                         "max": "200",
+                                         "oninput": f'range6.value=amount6.value'})
+        comment6 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+
+        range7 = IntegerRangeField(label="range",render_kw={'id':"range7",
+                                                "min": 0,
+                                                "max": 10,
+                                                "step": 1,
+                                                "style": "width:600px;",
+                                                "oninput": f"amount7.value=range7.value" })
+
+        input7 = IntegerField(render_kw={"id": f"amount7",
+                                         "type": "number",
+                                         "value": "5",
+                                         "min": "0",
+                                         "max": "200",
+                                         "oninput": f'range7.value=amount7.value'})
+        comment7 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+
+        range8 = IntegerRangeField(label="range",render_kw={'id':"range8",
+                                                "min": 0,
+                                                "max": 10,
+                                                "step": 1,
+                                                "style": "width:600px;",
+                                                "oninput": f"amount8.value=range8.value" })
+
+        input8 = IntegerField(render_kw={"id": f"amount8",
+                                         "type": "number",
+                                         "value": "5",
+                                         "min": "0",
+                                         "max": "200",
+                                         "oninput": f'range8.value=amount8.value'})
+        comment8 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+
 
 
 
