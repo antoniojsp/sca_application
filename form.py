@@ -130,8 +130,40 @@ class AutobiographicalForm(FlaskForm):
 
 class ScaleOMatic(FlaskForm):
 
-    range1 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:400px;", "oninput":"this.nextElementSibling.value = this.value"})
+    range1 = IntegerRangeField(render_kw = {"min": 0,
+                                            "max": 10,
+                                            "step": 1,
+                                            "style": "width:600px;",
+                                            "oninput":"amount.value=range1.value" })
+    # input1 = IntegerField(render_kw={"id": "amount",
+    #                                  "type": "number",
+    #                                  "value": "5",
+    #                                  "min": "0",
+    #                                  "max": "200",
+    #                                  "oninput":'range1.value=amount.value'})
 
+    comment1 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+
+    # range2 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
+    # comment2 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+    #
+    # range3 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
+    # comment3 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+    #
+    # range4 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
+    # comment4 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+    #
+    # range5 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
+    # comment5 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+    #
+    # range6 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
+    # comment6 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+    #
+    # range7 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
+    # comment7 = StringField("Comments:",render_kw={"placeholder":"Comments"})
+    #
+    # range8 = IntegerRangeField(label="Night Owl", render_kw = {"min": 0, "max": 10, "step": 1, "style": "width:600px;"})
+    # comment8 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
 
 
