@@ -6,12 +6,12 @@ from wtforms import StringField, FieldList, SubmitField, \
 from wtforms.validators import DataRequired, Length, Email
 # from wtforms.fields import DateTimeLocalField
 
-class CoverForm(FlaskForm):
+class CoverForm(Form):
     full_name = StringField(label='Full Name', validators=[DataRequired()],
                       render_kw={'autocomplete': "off"})
     today_date = DateField(label="Today's Date", format='%m/%d/%y', validators=[DataRequired()],render_kw={'autocomplete': "off"})
 
-class AgreementForm(FlaskForm):
+class AgreementForm(Form):
     initials1 = StringField(label="Initials", validators=[DataRequired()],render_kw={
                                  'autocomplete': "off"})
     initials2 = StringField(label="Initials", validators=[DataRequired()],render_kw={
@@ -29,9 +29,10 @@ class ChecklistForm(FlaskForm):
     check5 = BooleanField(label="check")
     check6 = BooleanField(label="check")
 
-class PersonalInformationForm(FlaskForm):
+
+class PersonalInformationForm(Form):
     full_legal_name = StringField(label="Full Legal Name", validators=[DataRequired()])
-    preferred_name = StringField(label="Prefered Name")
+    preferred_name = StringField(label="Preferred Name")
     pronouns = StringField(label="Pronouns", validators=[DataRequired()])
     dob =  DateTimeField(label="Date of Birth", validators=[DataRequired()])
     email = StringField(label="Email",  validators=[DataRequired(), Email()])
@@ -126,9 +127,9 @@ class ShortEssayForm(FlaskForm):
 
 class AutobiographicalForm(FlaskForm):
     question1 = TextAreaField(label="Please craft an autobiographical statement. Tell us about yourself in all your glory. Be creative! "
-                                    "There are no right or wrong answers. Applicants may submit brief essays, poems, short stories,"
-                                    " or drawings."
-                                    "If you are submitting a non-written autobiographical statement or if your statement does not fit"
+                                    "There are no right or wrong answers. Applicants may submit brief essays, poems, short stories, "
+                                    " or drawings. "
+                                    "If you are submitting a non-written autobiographical statement or if your statement does not fit "
                                     "below, please email it as a .doc, .Jpeg or .pdf file.", render_kw={"rows": "12", "cols": "150"})
     # print(question1)
 class ScaleOMatic(FlaskForm):
@@ -144,7 +145,7 @@ class ScaleOMatic(FlaskForm):
                                          "type": "number",
                                          "value": "5",
                                          "min": "0",
-                                         "max": "200",
+                                         "max": "10",
                                          "oninput": f'range1.value=amount1.value'})
         comment1 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
@@ -159,7 +160,7 @@ class ScaleOMatic(FlaskForm):
                                          "type": "number",
                                          "value": "5",
                                          "min": "0",
-                                         "max": "200",
+                                         "max": "10",
                                          "oninput": f'range2.value=amount2.value'})
         comment2 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
@@ -176,7 +177,7 @@ class ScaleOMatic(FlaskForm):
                                          "type": "number",
                                          "value": "5",
                                          "min": "0",
-                                         "max": "200",
+                                         "max": "10",
                                          "oninput": f'range3.value=amount3.value'})
         comment3 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
@@ -193,7 +194,7 @@ class ScaleOMatic(FlaskForm):
                                          "type": "number",
                                          "value": "5",
                                          "min": "0",
-                                         "max": "200",
+                                         "max": "10",
                                          "oninput": f'range4.value=amount4.value'})
         comment4 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
@@ -210,7 +211,7 @@ class ScaleOMatic(FlaskForm):
                                          "type": "number",
                                          "value": "5",
                                          "min": "0",
-                                         "max": "200",
+                                         "max": "10",
                                          "oninput": f'range5.value=amount5.value'})
         comment5 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
@@ -225,7 +226,7 @@ class ScaleOMatic(FlaskForm):
                                          "type": "number",
                                          "value": "5",
                                          "min": "0",
-                                         "max": "200",
+                                         "max": "10",
                                          "oninput": f'range6.value=amount6.value'})
         comment6 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
@@ -240,7 +241,7 @@ class ScaleOMatic(FlaskForm):
                                          "type": "number",
                                          "value": "5",
                                          "min": "0",
-                                         "max": "200",
+                                         "max": "10",
                                          "oninput": f'range7.value=amount7.value'})
         comment7 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
@@ -255,11 +256,35 @@ class ScaleOMatic(FlaskForm):
                                          "type": "number",
                                          "value": "5",
                                          "min": "0",
-                                         "max": "200",
+                                         "max": "10",
                                          "oninput": f'range8.value=amount8.value'})
         comment8 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
 
+class Contact(Form):
+    name = StringField(label="Name")
+    relationship = StringField(label="Relationship")
+    email = StringField(label="Email", validators=[DataRequired(), Email()])
+    phone = StringField('Phone', validators=[DataRequired()])
+
+class References(Form):
+
+    contacts = FieldList(FormField(Contact), label="Reference", min_entries=1)
+
+    # name1 = StringField(label="Name")
+    # relationship1 = StringField(label="Relationship")
+    # email1 = StringField(label="Email", validators=[DataRequired(), Email()])
+    # phone1 = StringField('Phone', validators=[DataRequired()])
+    #
+    # name2 = StringField(label="Name")
+    # relationship2 = StringField(label="Relationship")
+    # email2 = StringField(label="Email", validators=[DataRequired(), Email()])
+    # phone2 = StringField('Phone', validators=[DataRequired()])
+    #
+    # name3 = StringField(label="Name")
+    # relationship3 = StringField(label="Relationship")
+    # email3 = StringField(label="Email", validators=[DataRequired(), Email()])
+    # phone3 = StringField('Phone', validators=[DataRequired()])
 
 
 
