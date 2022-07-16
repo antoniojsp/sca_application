@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from form import CoverForm, AgreementForm, \
                  ChecklistForm, PersonalInformationForm, \
                  ShortEssayForm, AutobiographicalForm, \
-                 ScaleOMatic, References
+                 ScaleOMatic, References, Range
 app = Flask(__name__)
 
 app.secret_key = "maria"
@@ -28,8 +28,9 @@ def index():
             "range": range,
             "reference": reference}
 
-
-    return render_template("index.html", form=form)
+    lala = Range()
+    lala.range.label = "hoho"
+    return render_template("index.html", form=form, range=lala)
 
 
 if __name__ == "__main__":

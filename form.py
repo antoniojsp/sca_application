@@ -132,7 +132,28 @@ class AutobiographicalForm(FlaskForm):
                                     "If you are submitting a non-written autobiographical statement or if your statement does not fit "
                                     "below, please email it as a .doc, .Jpeg or .pdf file.", render_kw={"rows": "12", "cols": "150"})
     # print(question1)
+
+
+class Range(Form):
+    range = IntegerRangeField(label= "range", render_kw={"min": 0,
+                                                         "max": 10,
+                                                         "step": 1,
+                                                         "style": "width:600px;",
+                                                         })
+
+    input = IntegerField(render_kw={"type": "number",
+                                     "value": "5",
+                                     "min": "0",
+                                     "max": "10",
+                                    })
+    comment = StringField("Comments:", render_kw={"placeholder": "Comments"})
+
+
+
+
 class ScaleOMatic(FlaskForm):
+
+        range = FormField(Range)
 
         range1 = IntegerRangeField(label="range",render_kw={'id':"range1",
                                                 "min": 0,
@@ -261,6 +282,10 @@ class ScaleOMatic(FlaskForm):
         comment8 = StringField("Comments:",render_kw={"placeholder":"Comments"})
 
 
+
+
+
+
 class Contact(Form):
     name = StringField(label="Name")
     relationship = StringField(label="Relationship")
@@ -269,23 +294,9 @@ class Contact(Form):
 
 class References(Form):
 
-    contacts = FieldList(FormField(Contact), label="Reference", min_entries=1)
-
-    # name1 = StringField(label="Name")
-    # relationship1 = StringField(label="Relationship")
-    # email1 = StringField(label="Email", validators=[DataRequired(), Email()])
-    # phone1 = StringField('Phone', validators=[DataRequired()])
-    #
-    # name2 = StringField(label="Name")
-    # relationship2 = StringField(label="Relationship")
-    # email2 = StringField(label="Email", validators=[DataRequired(), Email()])
-    # phone2 = StringField('Phone', validators=[DataRequired()])
-    #
-    # name3 = StringField(label="Name")
-    # relationship3 = StringField(label="Relationship")
-    # email3 = StringField(label="Email", validators=[DataRequired(), Email()])
-    # phone3 = StringField('Phone', validators=[DataRequired()])
-
+    contacts1 = FormField(Contact)
+    contacts2 = FormField(Contact)
+    contacts3 = FormField(Contact)
 
 
     # submit = SubmitField(label="Shorten",
