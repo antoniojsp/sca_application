@@ -116,7 +116,7 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
 
     {% for i in agreements %}
         <ol>
-        {{ form.agreement.initials(id= "initials" ~ loop.index0) }}
+        {{ form.agreement.initials(id= "initials" ~ loop.index, width="10px") }}
         {{ i }}
         </ol>
     {% endfor %}
@@ -141,7 +141,7 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
 <ol>
     {% for i in checklist %}
     <li>
-    {{ form.checklist.check(id="check" ~ loop.index0) }}
+    {{ form.checklist.check(id="check" ~ loop.index) }}
     {{ i }}
     </li>
     {% endfor %}
@@ -224,10 +224,10 @@ DEPOSIT UPON MOVE IN.</strong>
  </li>
 
      <span id="was_boarder_terminated" style="display: none;">
-          <li>
+
         {{ form.personal.member_terminated_explanation.label }}
         {{ form.personal.member_terminated_explanation }}
-          </li>
+
      </span>
 
 
@@ -247,7 +247,7 @@ DEPOSIT UPON MOVE IN.</strong>
         {{ form.personal.major.label }}
         {{ form.personal.major }}
  </li>
-
+    <p>Please prioritize your choice of houses, 1-3, and select your room size preference:</p>
   <li>
         {{ form.personal.house_preference.label }}
         {{ form.personal.house_preference }}
@@ -343,7 +343,7 @@ DEPOSIT UPON MOVE IN.</strong>
         {% for i in essay %}
           <li>
             {{ i }}<br>
-            {{ form.short.question(id="essay" ~ loop.index0) }}
+            {{ form.short.question(id="essay" ~ loop.index) }}
           </li>
         {% endfor %}
     </ol>
@@ -358,7 +358,7 @@ DEPOSIT UPON MOVE IN.</strong>
         {% for i in auto %}
           <li>
             {{ i }}<br>
-            {{ form.auto.question(id="auto" ~ loop.index0) }}
+            {{ form.auto.question(id="auto" ~ loop.index) }}
           </li>
         {% endfor %}
     </ol>
@@ -373,11 +373,11 @@ DEPOSIT UPON MOVE IN.</strong>
       {% for i in moods %}
         <li>
           {{ i[0] }}
-          {{ form.range.range(id="range"~ loop.index0, oninput= "amount" ~ loop.index0 ~ ".value=range" ~ loop.index0 ~ ".value")  }} {{ i[1] }}
+          {{ form.range.range(id="range"~ loop.index, oninput= "amount" ~ loop.index ~ ".value=range" ~ loop.index ~ ".value")  }} {{ i[1] }}
           {{ i[1] }}
-          {{ form.range.input(id="amount"~loop.index0, oninput= "range" ~ loop.index0 ~ ".value=amount" ~ loop.index0 ~ ".value") }}<br>
-          {{ form.range.comment.label(id="comment"~loop.index0) }}
-          {{ form.range.comment(id="comment"~loop.index0) }}
+          {{ form.range.input(id="amount"~loop.index, oninput= "range" ~ loop.index ~ ".value=amount" ~ loop.index ~ ".value") }}<br>
+          {{ form.range.comment.label(id="comment"~loop.index) }}
+          {{ form.range.comment(id="comment"~loop.index) }}
         </li>
       {% endfor %}
     </ol>
