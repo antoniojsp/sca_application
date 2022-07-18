@@ -12,7 +12,7 @@
     <title>Students’ Cooperative Association </title>
 
 </head>
-<body>
+<body onload="current_date()">
 <h1> Students’ Cooperative Association </h1>
 <h3>Membership Application</h3>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -213,7 +213,6 @@ DEPOSIT UPON MOVE IN.</strong>
  <li>
         {{ form.personal.was_boarder.label }}
         {{ form.personal.was_boarder }}
-
       <span id="was_boarder_checked" style="display: none;">
             {{ form.personal.years_boarder.label }}
             {{ form.personal.years_boarder }}
@@ -228,13 +227,11 @@ DEPOSIT UPON MOVE IN.</strong>
 <li>
     {{ form.personal.member_terminated.label }}
     {{ form.personal.member_terminated }}
-         <span id="was_boarder_terminated" style="display: none;">
+     <span id="was_boarder_terminated" style="display: none;">
         {{ form.personal.member_terminated_explanation.label }}
         {{ form.personal.member_terminated_explanation }}
      </span>
 </li>
-
-
 
  <li>
         {{ form.personal.type_student.label }}
