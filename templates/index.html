@@ -14,7 +14,7 @@
 </head>
 <body>
 <h1> Students’ Cooperative Association </h1>
-<h2>Membership Application</h2>
+<h3>Membership Application</h3>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
     <a class="nav-link active" id="coverpage-tab" data-toggle="tab" href="#coverpage" role="tab" aria-controls="coverpage" aria-selected="true">Cover Page</a>
@@ -116,13 +116,13 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
 
     {% for i in agreements %}
         <ol>
-        {{ form.agreement.initials(id= "initials" ~ loop.index, width="10px") }}
+        {{ form.agreement.initials(id= "initials" ~ loop.index) }}
         {{ i }}
         </ol>
     {% endfor %}
 </div>
 <div class="tab-pane fade" id="checklist" role="tabpanel" aria-labelledby="checklist-tab">
-<h2>YOU MUST SUBMIT ALL OF THE FOLLOWING ITEMS BEFORE </h2>
+<h4>YOU MUST SUBMIT ALL OF THE FOLLOWING ITEMS BEFORE </h4>
 
     {% set checklist = [
     "Completed application. Please print or type. If filling out an application by hand, use black
@@ -146,8 +146,8 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
     </li>
     {% endfor %}
 </ol>
-<h2>YOUR APPLICATION AND DOCUMENTS CAN BE SUBMITTED ELECTRONICALLY TO
-SCA.WEOWNIT@GMAIL.COM ( ALL LOWERCASE)</h2>
+<h4>YOUR APPLICATION AND DOCUMENTS CAN BE SUBMITTED ELECTRONICALLY TO
+SCA.WEOWNIT@GMAIL.COM ( ALL LOWERCASE)</h4>
 
 <p>Electronic submission is preferred, however if you need to submit a hard copy, applications
 may also be mailed to or dropped off at the SCA office, located in the Lorax Manner at 1648
@@ -156,7 +156,7 @@ Alder St. Eugene, OR 97401.</p>
 DEPOSIT UPON MOVE IN.</strong>
 </div>
 <div class="tab-pane fade" id="personal-information" role="tabpanel" aria-labelledby="personal-information-tab">
-<h2>Personal Information & House Preference </h2>
+<h4>Personal Information & House Preference </h4>
 <ul>
  <li>
     {{ form.personal.full_legal_name.label }}
@@ -170,8 +170,15 @@ DEPOSIT UPON MOVE IN.</strong>
 
  <li>
         {{ form.personal.pronouns.label }}
-        {{ form.personal.pronouns }}
-
+     {{ form.personal.pronouns(list="id_datalist") }}
+     {% set entries = ["He/Him", "She/Her", "They/Their", "Zie/Zir", "Sie/Sir", "Ey/Eir"] %}
+     <datalist id="id_datalist">
+        {% for entry in entries %}
+        <option value={{ entry }}>
+        {% endfor %}
+    </datalist>
+</li>
+<li>
         {{ form.personal.dob.label }}
         {{ form.personal.dob }}
  </li>
@@ -196,13 +203,15 @@ DEPOSIT UPON MOVE IN.</strong>
 
  <li>
         {{ form.personal.term_move_in.label }}
-        {{ form.personal.term_move_in }}
-
+        <br>
+        {{ form.personal.term_move_in}}
+        <br>
         {{ form.personal.year.label }}
         {{ form.personal.year }}
  </li>
 
  <li>
+
         {{ form.personal.was_boarder.label }}
         {{ form.personal.was_boarder }}
 
@@ -247,10 +256,23 @@ DEPOSIT UPON MOVE IN.</strong>
         {{ form.personal.major.label }}
         {{ form.personal.major }}
  </li>
-    <p>Please prioritize your choice of houses, 1-3, and select your room size preference:</p>
+
   <li>
-        {{ form.personal.house_preference.label }}
-        {{ form.personal.house_preference }}
+      <p>Please prioritize your choice of houses, 1-3, and select your room size preference:</p>
+      <h6>House Preference</h6>
+        {% for i in range(1,4) %}
+            Option {{ i }}
+            {{ form.personal.house_preference }}
+            <br>
+        {% endfor %}
+      <br>
+      <h6>Room Preference</h6>
+        {% for i in range(1,4) %}
+            Option {{ i }}
+            {{ form.personal.room_preference }}
+            <br>
+        {% endfor %}
+      <br>
  </li>
   <li>
         {{ form.personal.if_not_available.label }}
@@ -383,7 +405,7 @@ DEPOSIT UPON MOVE IN.</strong>
     </ol>
 </div>
 <div class="tab-pane fade" id="references" role="tabpanel" aria-labelledby="references-tab">
-  <h1>References</h1>
+  <h3>References</h3>
   <p>
     Please list 3 references (excluding family and current SCA members), their addresses, phone
     numbers and/or email. Specify their relationship to you. If possible, include a previous landlord,
@@ -393,7 +415,7 @@ DEPOSIT UPON MOVE IN.</strong>
 
 
     {% for i in range(1,4) %}
-        <h2> Reference {{ i }}</h2>
+        <h4> Reference {{ i }}</h4>
         {{ form.reference.name.label }}
         {{ form.reference.name(id="ref" ~ loop.index) }}
         {{ form.reference.relationship.label }}

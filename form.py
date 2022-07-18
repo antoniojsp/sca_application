@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, FieldList, SubmitField, \
-                    BooleanField, DateTimeField, \
-                    IntegerField, SelectField, \
-                    DateField, TextAreaField, IntegerRangeField, Form, FormField
+from wtforms import StringField,\
+                    BooleanField,\
+                    IntegerField, SelectField,\
+                    DateField, TextAreaField, IntegerRangeField, Form, SelectMultipleField
 from wtforms.validators import DataRequired, Length, Email
 
 
@@ -16,7 +16,7 @@ class CoverForm(FlaskForm):
 
 class AgreementForm(Form):
     initials = StringField(validators=[DataRequired()],
-                           render_kw={'autocomplete': "off"})
+                           render_kw={'autocomplete': "off", "maxlength":"4", "style":"width: 50px;"})
 
 
 class ChecklistForm(FlaskForm):
@@ -24,36 +24,62 @@ class ChecklistForm(FlaskForm):
 
 
 class PersonalInformationForm(Form):
-    full_legal_name = StringField(label="Full Legal Name", validators=[DataRequired()])
+    full_legal_name = StringField(label="Full Legal Name",
+                                  validators=[DataRequired()],
+                                  render_kw={"style":"width: 400px;"})
     preferred_name = StringField(label="Preferred Name")
-    pronouns = StringField(label="Pronouns", validators=[DataRequired()])
-    dob = DateField(label="Date of Birth", format='%m/%d/%y', validators=[DataRequired()],render_kw={'autocomplete': "off"})
-    email = StringField(label="Email",  validators=[DataRequired(), Email()],
-                        render_kw={"placeholder":"example@mail.com"})
-    phone = IntegerField('Phone', validators=[DataRequired()])
-    permanent_address =StringField(label="Address", validators=[DataRequired()])
-    current_address = StringField(label="Current Address", validators=[DataRequired()])
-    term_move_in = SelectField(label="Check the term you wish to move in. If you’re flexible, mark multiple terms. If you intend to "\
-                                     "move in during the middle of a term, please let us know. ", choices=["Fall", "Winter", "Spring", "Summer"])
-    year = IntegerField(label="Year", validators=[DataRequired()], render_kw={ "min":"1920", "max":"2099"})
-    #Ajax
+    pronouns = StringField(label="Select your preferred pronoun or add it. ",
+                           validators=[DataRequired()])
+    dob = DateField(label="Date of Birth",
+                    format='%m/%d/%y',
+                    validators=[DataRequired()],
+                    render_kw={'autocomplete': "off"})
+    email = StringField(label="Email",
+                        validators=[DataRequired()],
+                        render_kw={"placeholder": "example@mail.com",
+                                   "type": "email"})
+    phone = IntegerField(label='Phone',
+                         validators=[DataRequired()])
+    permanent_address = StringField(label="Address",
+                                    validators=[DataRequired()],
+                                    render_kw={"style": "width: 500px;"})
+    current_address = StringField(label="Current Address",
+                                  validators=[DataRequired()],
+                                  render_kw={"style": "width: 500px;"})
+
+    my_choices = [('1', 'Fall'), ('2', 'Spring'), ('3', 'Summer'), ('4', "Winter")]
+    term_move_in = SelectMultipleField(label="Check the term you wish to move in. "
+                                             "If you’re flexible, mark multiple terms "
+                                             "(Use command to select multiple). "
+                                             "If you intend to move in during the middle of a term, please let us know",
+                                       choices=my_choices)
+
+    year = IntegerField(label="Year", validators=[DataRequired()], render_kw={ "min": "2022", "value": "2022"})
+
     was_boarder = BooleanField("Have you ever been a resident or boarder of the SCA?",
                                render_kw={'onclick':"showStuff('was_boarder_checked')"})
-    years_boarder = IntegerField(label="Year", render_kw={ "min":"1920", "max":"2099"})
+    years_boarder = IntegerField(label="Year", render_kw={"min": "1920", "max": "2099"})
     denied_membership = BooleanField("Have you ever been denied membership with the SCA? (Answering 'yes’ to this question does"\
                                      "not necessarily disqualify you from membership.)")
-    #Ajax
-    member_terminated = BooleanField(label="Have you ever had your membership or tenancy terminated by the SCA and/or another" \
-                        "housing organization (Answering ‘yes’ to this question does not necessarily disqualify " \
-                        "you from membership.)",
-                        render_kw={"onclick":"showStuff('was_boarder_terminated')"})
+
+    member_terminated = BooleanField(label="Have you ever had your membership or tenancy terminated "
+                                           "by the SCA and/or another housing organization (Answering "
+                                           "‘yes’ to this question does not necessarily disqualify you "
+                                           "from membership.)",
+                                     render_kw={"onclick": "showStuff('was_boarder_terminated')"})
+
     member_terminated_explanation = StringField(label="If yes, explain")
-    #AJax
+
     type_student = SelectField(label="Type of Student", choices=["Non Student", "Undergrad", "Graduate", "Post-Baccalaureate"])
+
     school_year = IntegerField(label="School Year")
     credits = IntegerField(label="Credits")
     major = StringField(label="Major")
-    house_preference = SelectField(label="Please prioritize your choice of houses", choices=["JS", "Lorax", "Campbell Club"])
+
+
+    house_preference = SelectField(choices=["None", "JS", "Lorax", "Campbell Club"])
+    room_preference = SelectField(choices=["None", "Single", "Small Single", "Double"])
+
     if_not_available = BooleanField("If you have a strong preference for one house or will only consider living in one or two of the/"
                                     "houses, please let us know:")
     waitlist = BooleanField("Are you willing to be placed on a waiting list for an open housing spot?")
