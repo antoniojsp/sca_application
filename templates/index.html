@@ -211,7 +211,6 @@ DEPOSIT UPON MOVE IN.</strong>
  </li>
 
  <li>
-
         {{ form.personal.was_boarder.label }}
         {{ form.personal.was_boarder }}
 
@@ -219,7 +218,6 @@ DEPOSIT UPON MOVE IN.</strong>
             {{ form.personal.years_boarder.label }}
             {{ form.personal.years_boarder }}
       </span>
-
  </li>
 
  <li>
@@ -227,34 +225,31 @@ DEPOSIT UPON MOVE IN.</strong>
         {{ form.personal.denied_membership }}
  </li>
 
- <li>
-        {{ form.personal.member_terminated.label }}
-        {{ form.personal.member_terminated }}
- </li>
-
-     <span id="was_boarder_terminated" style="display: none;">
-
+<li>
+    {{ form.personal.member_terminated.label }}
+    {{ form.personal.member_terminated }}
+         <span id="was_boarder_terminated" style="display: none;">
         {{ form.personal.member_terminated_explanation.label }}
         {{ form.personal.member_terminated_explanation }}
-
      </span>
+</li>
 
 
 
  <li>
         {{ form.personal.type_student.label }}
         {{ form.personal.type_student }}
- </li>
- <li>
+
+        <div id="is_student" style="display: none;">
         {{ form.personal.school_year.label }}
         {{ form.personal.school_year }}
 
         {{ form.personal.credits.label }}
         {{ form.personal.credits }}
- </li>
-  <li>
+
         {{ form.personal.major.label }}
         {{ form.personal.major }}
+        </div>
  </li>
 
   <li>
@@ -275,10 +270,14 @@ DEPOSIT UPON MOVE IN.</strong>
       <br>
  </li>
   <li>
-        {{ form.personal.if_not_available.label }}
-        {{ form.personal.if_not_available }}
+        {{ form.personal.house_no_available.label }}
+        {{ form.personal.house_no_available }}
  </li>
 
+    <li>
+        {{ form.personal.if_not_available.label }}
+        {{ form.personal.if_not_available }}
+    </li>
   <li>
         {{ form.personal.waitlist.label }}
         {{ form.personal.waitlist }}
@@ -310,9 +309,16 @@ DEPOSIT UPON MOVE IN.</strong>
  </li>
 
  <li>
-        {{ form.personal.heer_about_us.label }}
-        {{ form.personal.heer_about_us }}
+        {{ form.personal.hear_about_us.label }}<br>
+        {{ form.personal.hear_about_us }}
+
+      <div id="other_hear" style="display: none;">
+          {{ form.personal.if_other_about_us.label }}
+          {{ form.personal.if_other_about_us }}
+      </div>
+
  </li>
+
 </ul>
 
 </div>

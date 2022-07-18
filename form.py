@@ -58,7 +58,7 @@ class PersonalInformationForm(Form):
 
     was_boarder = BooleanField("Have you ever been a resident or boarder of the SCA?",
                                render_kw={'onclick':"showStuff('was_boarder_checked')"})
-    years_boarder = IntegerField(label="Year", render_kw={"min": "1920", "max": "2099"})
+    years_boarder = IntegerField(label="Year", render_kw={"min": "1920", "max": "2022"})
     denied_membership = BooleanField("Have you ever been denied membership with the SCA? (Answering 'yes’ to this question does"\
                                      "not necessarily disqualify you from membership.)")
 
@@ -70,17 +70,19 @@ class PersonalInformationForm(Form):
 
     member_terminated_explanation = StringField(label="If yes, explain")
 
-    type_student = SelectField(label="Type of Student", choices=["Non Student", "Undergrad", "Graduate", "Post-Baccalaureate"])
-
+    type_student = SelectField(label="Type of Student",
+                               choices=["Non Student", "Undergrad", "Graduate", "Post-Baccalaureate"],
+                               render_kw={"onchange": "hide_if_selected(this.value, 'is_student', 'Non Student')"})
     school_year = IntegerField(label="School Year")
     credits = IntegerField(label="Credits")
     major = StringField(label="Major")
 
-
     house_preference = SelectField(choices=["None", "JS", "Lorax", "Campbell Club"])
     room_preference = SelectField(choices=["None", "Single", "Small Single", "Double"])
 
-    if_not_available = BooleanField("If you have a strong preference for one house or will only consider living in one or two of the/"
+    house_no_available = BooleanField("If your choice of room or household is not available, would you be willing to be assigned to "
+                                      "another house and/or room?")
+    if_not_available = BooleanField("If you have a strong preference for one house or will only consider living in one or two of the"
                                     "houses, please let us know:")
     waitlist = BooleanField("Are you willing to be placed on a waiting list for an open housing spot?")
     allergies = StringField("Allergies?")
@@ -91,7 +93,9 @@ class PersonalInformationForm(Form):
     pet_description = StringField(label="Pet Description: ")
     pet_needs = StringField(label="What are your pet’s needs (outdoor/indoor/other) and how they tend to interact with other" +
                                   "animals?: ")
-    heer_about_us = SelectField(label="How did you hear about us?", choices=["Radio", "Fb", "Craiglist", "Friend"])
+    hear_about_us = SelectMultipleField(label="How did you hear about us?", choices=["Radio", "Fb", "Craiglist", "Friend", "Other"],
+                                    render_kw={"onclick": "show_if_selected(this.value, 'other_hear', 'Other')"})
+    if_other_about_us = StringField(label="If other, please, specify.")
 
 
 class ShortEssayForm(FlaskForm):
