@@ -58,17 +58,17 @@ class PersonalInformationForm(Form):
 
     was_boarder = BooleanField("Have you ever been a resident or boarder of the SCA?",
                                render_kw={'onclick':"showStuff('was_boarder_checked')"})
-    years_boarder = IntegerField(label="Year", render_kw={"min": "1920", "max": "2022"})
-    denied_membership = BooleanField("Have you ever been denied membership with the SCA? (Answering 'yes’ to this question does"\
+    years_boarder = IntegerField(label="In what year", render_kw={"min": "1920", "max": "2022"})
+    denied_membership = BooleanField("Have you ever been denied membership with the SCA? (Checking this option does"\
                                      "not necessarily disqualify you from membership.)")
 
     member_terminated = BooleanField(label="Have you ever had your membership or tenancy terminated "
-                                           "by the SCA and/or another housing organization (Answering "
-                                           "‘yes’ to this question does not necessarily disqualify you "
+                                           "by the SCA and/or another housing organization (Checking "
+                                           "this question does not necessarily disqualify you "
                                            "from membership.)",
                                      render_kw={"onclick": "showStuff('was_boarder_terminated')"})
 
-    member_terminated_explanation = StringField(label="If yes, explain")
+    member_terminated_explanation = TextAreaField(label="If yes, explain", render_kw={"rows": "12", "cols": "150"})
 
     type_student = SelectField(label="Type of Student",
                                choices=["Non Student", "Undergrad", "Graduate", "Post-Baccalaureate"],
