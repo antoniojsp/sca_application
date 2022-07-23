@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from form import CoverForm, AgreementForm, \
                  ChecklistForm, PersonalInformationForm, \
                  ShortEssayForm, AutobiographicalForm, \
@@ -29,6 +29,13 @@ def index():
             "reference": reference}
 
     return render_template("index.html", form=form)
+
+@app.route('/_submit',  methods=[ 'GET', 'POST' ])
+def _submit():
+    package = request.args.get("data")
+    import sys
+    print(package)
+    return jsonify(result={"response": "hola"})
 
 
 if __name__ == "__main__":

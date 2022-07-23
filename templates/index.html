@@ -11,6 +11,7 @@
 
 </head>
 <body onload="current_date()">
+
 <h1> Students’ Cooperative Association </h1>
 <h3>Membership Application</h3>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -49,6 +50,7 @@
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
+
 <div class="tab-pane fade show active" id="coverpage" role="tabpanel" aria-labelledby="coverpage-tab">.
 <p>
     {{ form.cover.csrf_token }}
@@ -125,7 +127,8 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
 
 </div>
 <div class="tab-pane fade" id="checklist" role="tabpanel" aria-labelledby="checklist-tab">
-<h4>YOU MUST SUBMIT ALL OF THE FOLLOWING ITEMS BEFORE </h4>
+<h4>YOU MUST SUBMIT ALL (THAT APPLIES TO YOU) OF THE FOLLOWING ITEMS BEFORE YOUR APPLICATION WILL BE
+APPROVED BY MEMBERSHIP:  </h4>
 
     {% set checklist = [
     "Completed application. Please print or type. If filling out an application by hand, use black
@@ -139,7 +142,7 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
     from entry from the SCA. Simply mention so on this application and your status will be taken
     into account.",
     "Proof of spay/neuter and current vaccinations for animals (If applicable)",
-    "Autobiographical statement: See on page 13 of this application."] %}
+    "Autobiographical statement (in this form)."] %}
 
 <ol>
     {% for i in checklist %}
@@ -156,9 +159,9 @@ SCA.WEOWNIT@GMAIL.COM ( ALL LOWERCASE)</h4>
 may also be mailed to or dropped off at the SCA office, located in the Lorax Manner at 1648
 Alder St. Eugene, OR 97401.</p>
 <strong>IF YOU ARE ACCEPTED AS A MEMBER, YOU MUST PAY YOUR FIRST MONTH OF FEES AND A
-DEPOSIT UPON MOVE IN.</strong>
+DEPOSIT UPON MOVE IN.</strong><br>
 
-        <a class="btn btn-primary btnPrevious">Previous</a>
+    <a class="btn btn-primary btnPrevious">Previous</a>
     <a class="btn btn-primary btnNext">Next</a>
 </div>
 <div class="tab-pane fade" id="personal-information" role="tabpanel" aria-labelledby="personal-information-tab">
@@ -208,12 +211,12 @@ DEPOSIT UPON MOVE IN.</strong>
  </li>
 
  <li>
-        {{ form.personal.term_move_in.label }}
+        {{ form.personal.move_in_term.label }}
         <br>
-        {{ form.personal.term_move_in}}
+        {{ form.personal.move_in_term}}
         <br>
-        {{ form.personal.year.label }}
-        {{ form.personal.year }}
+        {{ form.personal.move_in_year.label }}
+        {{ form.personal.move_in_year }}
  </li>
 
  <li>
@@ -244,6 +247,9 @@ DEPOSIT UPON MOVE IN.</strong>
         {{ form.personal.type_student }}
 
         <div id="is_student" style="display: none;">
+
+        What institution of higher learning will you be enrolled in while living at the SCA?<br>
+        {{ form.personal.which_school }}<br>
         {{ form.personal.school_year.label }}
         {{ form.personal.school_year }}
 
@@ -300,15 +306,14 @@ DEPOSIT UPON MOVE IN.</strong>
   <li>
         {{ form.personal.pet.label }}
         {{ form.personal.pet }}
- </li>
- <li>
+
+      <div id="has_pet" style="display: none;">
         {{ form.personal.pet_description.label }}
         {{ form.personal.pet_description }}
- </li>
 
- <li>
         {{ form.personal.pet_needs.label }}
         {{ form.personal.pet_needs }}
+      </div>
  </li>
 
  <li>
@@ -453,6 +458,7 @@ DEPOSIT UPON MOVE IN.</strong>
     <a class="btn btn-primary btnNext">Next</a>
 </div>
 <div class="tab-pane fade" id="submit" role="tabpanel" aria-labelledby="submit-tab">
+    <input id="submit_form" type="submit" value="Submit">
     <a class="btn btn-primary btnPrevious">Previous</a>
 </div>
 <!--&lt;!&ndash;            {{ form.submit}}&ndash;&gt;-->

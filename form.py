@@ -8,19 +8,23 @@ from wtforms.validators import DataRequired, Length, Email
 
 class CoverForm(FlaskForm):
     full_name = StringField(label='Full Name', validators=[DataRequired()],
-                            render_kw={'autocomplete': "off"})
+                            render_kw={'class':"cover", 'autocomplete': "off", "style":"width: 400px;"})
     today_date = DateField(label="Today's Date", format='%m/%d/%y',
-                           render_kw={'autocomplete': "off"},
+                           render_kw={'autocomplete': "off", 'class': "cover"},
                            validators=[DataRequired()])
 
 
 class AgreementForm(Form):
     initials = StringField(validators=[DataRequired()],
-                           render_kw={'autocomplete': "off", "maxlength":"4", "style":"width: 50px;"})
+                           render_kw={'autocomplete': "off",
+                                      "maxlength":"4",
+                                      "style":"width: 60px;",
+                                      "placeholder": "initials",
+                                      'class': 'agreement'})
 
 
-class ChecklistForm(FlaskForm):
-    check = BooleanField()
+class ChecklistForm(Form):
+    check = BooleanField(render_kw={'class':'agreement'}, validators=[DataRequired()])
 
 
 class PersonalInformationForm(Form):
@@ -28,8 +32,7 @@ class PersonalInformationForm(Form):
                                   validators=[DataRequired()],
                                   render_kw={"style":"width: 400px;"})
     preferred_name = StringField(label="Preferred Name")
-    pronouns = StringField(label="Select your preferred pronoun or add it. ",
-                           validators=[DataRequired()])
+    pronouns = StringField(label="Select your preferred pronoun or add one. ")
     dob = DateField(label="Date of Birth",
                     format='%m/%d/%y',
                     validators=[DataRequired()],
@@ -47,32 +50,37 @@ class PersonalInformationForm(Form):
                                   validators=[DataRequired()],
                                   render_kw={"style": "width: 500px;"})
 
+
     my_choices = [('1', 'Fall'), ('2', 'Spring'), ('3', 'Summer'), ('4', "Winter")]
-    term_move_in = SelectMultipleField(label="Check the term you wish to move in. "
+    move_in_term = SelectMultipleField(label="Check the term you wish to move in. "
                                              "If you’re flexible, mark multiple terms "
                                              "(Use command to select multiple). "
                                              "If you intend to move in during the middle of a term, please let us know",
-                                       choices=my_choices)
+                                       choices=my_choices,
+                                       validators=[DataRequired()])
 
-    year = IntegerField(label="Year", validators=[DataRequired()], render_kw={ "min": "2022", "value": "2022"})
+    move_in_year= IntegerField(label="Year",
+                               validators= [DataRequired()])
 
-    was_boarder = BooleanField("Have you ever been a resident or boarder of the SCA?",
+    was_boarder = BooleanField("Have you ever been a resident or boarder of the SCA? Yes",
                                render_kw={'onclick':"showStuff('was_boarder_checked')"})
     years_boarder = IntegerField(label="In what year", render_kw={"min": "1920", "max": "2022"})
+
     denied_membership = BooleanField("Have you ever been denied membership with the SCA? (Checking this option does"\
                                      "not necessarily disqualify you from membership.)")
 
     member_terminated = BooleanField(label="Have you ever had your membership or tenancy terminated "
                                            "by the SCA and/or another housing organization (Checking "
                                            "this question does not necessarily disqualify you "
-                                           "from membership.)",
+                                           "from membership.) Yes",
                                      render_kw={"onclick": "showStuff('was_boarder_terminated')"})
-
     member_terminated_explanation = TextAreaField(label="If yes, explain", render_kw={"rows": "12", "cols": "150"})
+
 
     type_student = SelectField(label="Type of Student",
                                choices=["Non Student", "Undergrad", "Graduate", "Post-Baccalaureate"],
                                render_kw={"onchange": "hide_if_selected(this.value, 'is_student', 'Non Student')"})
+    which_school = StringField(render_kw={"style":"width: 400px;"})
     school_year = IntegerField(label="School Year")
     credits = IntegerField(label="Credits")
     major = StringField(label="Major")
@@ -89,7 +97,8 @@ class PersonalInformationForm(Form):
     how_long = StringField(label="How long do you expect to live in these houses? If you don’t know /"
                                  "that’s okay.", validators=[DataRequired()])
     #Ajax
-    pet = BooleanField("Do you have a pet you’d like to bring?")
+    pet = BooleanField("Do you have a pet you’d like to bring?",
+                       render_kw={'onclick':"showStuff('has_pet')"})
     pet_description = StringField(label="Pet Description: ")
     pet_needs = StringField(label="What are your pet’s needs (outdoor/indoor/other) and how they tend to interact with other" +
                                   "animals?: ")
@@ -98,7 +107,7 @@ class PersonalInformationForm(Form):
     if_other_about_us = StringField(label="If other, please, specify.")
 
 
-class ShortEssayForm(FlaskForm):
+class ShortEssayForm(Form):
     question = TextAreaField(render_kw={"rows":"12", "cols":"150"})
 
 
