@@ -50,17 +50,14 @@
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
+<div class="tab-pane fade show active" id="coverpage" role="tabpanel" aria-labelledby="coverpage-tab">
 
-<div class="tab-pane fade show active" id="coverpage" role="tabpanel" aria-labelledby="coverpage-tab">.
-<p>
     {{ form.cover.csrf_token }}
-
-    {{ form.cover.full_name.label }}
+    Full Name
     {{ form.cover.full_name }}
-
-    {{ form.cover.today_date.label }}
+    Today's date
     {{ form.cover.today_date }}
-</p>
+
 <p style="text-align: center;">
 Thank you for applying for membership with the Students’ Cooperative Association. We accept
 applications from students and non-students (18+). Priority goes to students, but non-students
@@ -92,7 +89,6 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
 
 <a class="btn btn-primary btnNext">Next</a>
 
-
 </div>
 <div class="tab-pane fade" id="agreement" role="tabpanel" aria-labelledby="agreement-tab">
     <p>
@@ -115,20 +111,21 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
     SCA policies, including those listed above.",
     "Upon joining the SCA, I will attend orientation workshops and trainings."] %}
 
+    <ul>
     {% for i in agreements %}
-        <ol>
+        <li>
         {{ form.agreement.initials(id= "initials" ~ loop.index) }}
         {{ i }}
-        </ol>
+        </li>
     {% endfor %}
-
+    </ul>
     <a class="btn btn-primary btnPrevious">Previous</a>
     <a class="btn btn-primary btnNext">Next</a>
 
 </div>
 <div class="tab-pane fade" id="checklist" role="tabpanel" aria-labelledby="checklist-tab">
-<h4>YOU MUST SUBMIT ALL (THAT APPLIES TO YOU) OF THE FOLLOWING ITEMS BEFORE YOUR APPLICATION WILL BE
-APPROVED BY MEMBERSHIP:  </h4>
+<h5>YOU MUST SUBMIT ALL (THAT APPLIES TO YOU) OF THE FOLLOWING ITEMS BEFORE YOUR APPLICATION WILL BE
+APPROVED BY MEMBERSHIP:  </h5>
 
     {% set checklist = [
     "Completed application. Please print or type. If filling out an application by hand, use black
@@ -152,8 +149,8 @@ APPROVED BY MEMBERSHIP:  </h4>
     </li>
     {% endfor %}
 </ol>
-<h4>YOUR APPLICATION AND DOCUMENTS CAN BE SUBMITTED ELECTRONICALLY TO
-SCA.WEOWNIT@GMAIL.COM ( ALL LOWERCASE)</h4>
+<h5>YOUR APPLICATION AND DOCUMENTS CAN BE SUBMITTED ELECTRONICALLY TO
+SCA.WEOWNIT@GMAIL.COM ( ALL LOWERCASE)</h5>
 
 <p>Electronic submission is preferred, however if you need to submit a hard copy, applications
 may also be mailed to or dropped off at the SCA office, located in the Lorax Manner at 1648
@@ -168,17 +165,17 @@ DEPOSIT UPON MOVE IN.</strong><br>
 <h4>Personal Information & House Preference </h4>
 <ul>
  <li>
-    {{ form.personal.full_legal_name.label }}
+    Full Legal Name
     {{ form.personal.full_legal_name }}
 </li>
 
  <li>
-        {{ form.personal.preferred_name.label }}
+        Preferred name
         {{ form.personal.preferred_name }}
 </li>
 
  <li>
-        {{ form.personal.pronouns.label }}
+     Select your preferred pronoun or add one
      {{ form.personal.pronouns(list="id_datalist") }}
      {% set entries = ["He/Him", "She/Her", "They/Their", "Zie/Zir", "Sie/Sir", "Ey/Eir"] %}
      <datalist id="id_datalist">
@@ -188,75 +185,76 @@ DEPOSIT UPON MOVE IN.</strong><br>
     </datalist>
 </li>
 <li>
-        {{ form.personal.dob.label }}
+        Date of Birth
         {{ form.personal.dob }}
  </li>
 
  <li>
-        {{ form.personal.email.label }}
+        Email
         {{ form.personal.email }}
 
-         {{ form.personal.phone.label }}
+         Personal Phone
          {{ form.personal.phone }}
  </li>
 
  <li>
-        {{ form.personal.permanent_address.label }}
+        Address
         {{ form.personal.permanent_address }}
  </li>
 
  <li>
-        {{ form.personal.current_address.label }}
+        Current Address
         {{ form.personal.current_address }}
  </li>
 
  <li>
-        {{ form.personal.move_in_term.label }}
+        Check the term you wish to move in. If you’re flexible, mark multiple terms (Use command to select multiple). If you intend to move in during the middle of a term, please let us know
         <br>
         {{ form.personal.move_in_term}}
         <br>
-        {{ form.personal.move_in_year.label }}
+        Year
         {{ form.personal.move_in_year }}
  </li>
 
  <li>
-        {{ form.personal.was_boarder.label }}
+        Have you ever been a resident or boarder of the SCA? (Check if apply)
         {{ form.personal.was_boarder }}
       <span id="was_boarder_checked" style="display: none;">
-            {{ form.personal.years_boarder.label }}
+            Which year
             {{ form.personal.years_boarder }}
       </span>
  </li>
 
  <li>
-        {{ form.personal.denied_membership.label }}
+
+        Have you ever been denied membership with the SCA? (Checking this option does not necessarily disqualify you from membership.)
         {{ form.personal.denied_membership }}
  </li>
 
 <li>
-    {{ form.personal.member_terminated.label }}
+    Have you ever had your membership or tenancy terminated by the SCA and/or another housing organization (Checking this question does not necessarily disqualify you from membership.) (Check if applies)
     {{ form.personal.member_terminated }}
      <span id="was_boarder_terminated" style="display: none;">
-        {{ form.personal.member_terminated_explanation.label }}
+        If Yes, explain<br>
         {{ form.personal.member_terminated_explanation }}
      </span>
 </li>
 
  <li>
-        {{ form.personal.type_student.label }}
+        Type of Student
         {{ form.personal.type_student }}
 
         <div id="is_student" style="display: none;">
 
         What institution of higher learning will you be enrolled in while living at the SCA?<br>
         {{ form.personal.which_school }}<br>
-        {{ form.personal.school_year.label }}
+        School Year
         {{ form.personal.school_year }}
 
-        {{ form.personal.credits.label }}
+        Credits
         {{ form.personal.credits }}
 
-        {{ form.personal.major.label }}
+        Mayor
         {{ form.personal.major }}
         </div>
  </li>
@@ -279,49 +277,50 @@ DEPOSIT UPON MOVE IN.</strong><br>
       <br>
  </li>
   <li>
-        {{ form.personal.house_no_available.label }}
+        If your choice of room or household is not available, would you be willing to be assigned to another house and/or room?
         {{ form.personal.house_no_available }}
  </li>
 
     <li>
-        {{ form.personal.if_not_available.label }}
+        If you have a strong preference for one house or will only consider living in one or two of the houses, please let us know:
         {{ form.personal.if_not_available }}
     </li>
   <li>
-        {{ form.personal.waitlist.label }}
+        Are you willing to be placed on a waiting list for an open housing spot?
         {{ form.personal.waitlist }}
  </li>
 
 
  <li>
-        {{ form.personal.allergies.label }}
+        Allergies?
         {{ form.personal.allergies }}
  </li>
 
   <li>
-        {{ form.personal.how_long.label }}
+        How long do you expect to live in these houses? If you don’t know /"
+                                 "that’s okay.
         {{ form.personal.how_long }}
  </li>
 
   <li>
-        {{ form.personal.pet.label }}
+        Do you have a pet you’d like to bring?
         {{ form.personal.pet }}
 
       <div id="has_pet" style="display: none;">
-        {{ form.personal.pet_description.label }}
+        Pet Description:
         {{ form.personal.pet_description }}
 
-        {{ form.personal.pet_needs.label }}
+        What are your pet’s needs (outdoor/indoor/other) and how they tend to interact with other animals?
         {{ form.personal.pet_needs }}
       </div>
  </li>
 
  <li>
-        {{ form.personal.hear_about_us.label }}<br>
+        How did you hear about us?<br>
         {{ form.personal.hear_about_us }}
 
       <div id="other_hear" style="display: none;">
-          {{ form.personal.if_other_about_us.label }}
+          If other, please, specify
           {{ form.personal.if_other_about_us }}
       </div>
 
@@ -461,6 +460,7 @@ DEPOSIT UPON MOVE IN.</strong><br>
     <input id="submit_form" type="submit" value="Submit">
     <a class="btn btn-primary btnPrevious">Previous</a>
 </div>
+
 <!--&lt;!&ndash;            {{ form.submit}}&ndash;&gt;-->
 <!--&lt;!&ndash;            <button type="reset" id="clear" class="btn btn-success" onclick="clear_button()"> Clear </button>&ndash;&gt;-->
 </body>
