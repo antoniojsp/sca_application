@@ -77,9 +77,19 @@ have not heard from us by that time, please call or email to ensure we have rece
 Applicants will be considered for membership as openings occur; we do not have specific
 application deadlines. When there are no current openings, we will keep applications in a pool
 for up to one year. Applicants will be evaluated according to the following criteria:<br>
-• Interest in the cooperative life and ability to work in a cooperative manner
-• Involvement in their community or school
-• Personal references
+
+<ul>
+    <li>
+        Interest in the cooperative life and ability to work in a cooperative manner
+    </li>
+    <li>
+        Involvement in their community or school
+    </li>
+    <li>
+        Personal references
+    </li>
+</ul>
+
 Membership Diversity and other house-specific needs may be taken into consideration.<br>
 If you have any questions or need help filling out this application, please contact us at
 sca.weownit@gmail.com. In addition, we have a google form application available at this link
@@ -91,11 +101,7 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
 
 </div>
 <div class="tab-pane fade" id="agreement" role="tabpanel" aria-labelledby="agreement-tab">
-    <p>
-    <strong>BEFORE YOU BEGIN THIS APPLICATION, IT IS IMPORTANT THAT YOU UNDERSTAND A FEW
-    THINGS ABOUT THE CO-OPS. PLEASE INITIAL THE FOLLOWING POINTS TO INDICATE THAT
-    YOU UNDERSTAND AND AGREE TO THESE REQUIREMENTS:</strong><br>
-    </p>
+
     {% set agreements = [
     "I will live with people who come from different classes, gender identities, and racial and  ethnic backgrounds from my own.",
     "I will be expected to do the agreed upon labor decided at house job meetings. For example, this may look like 4-5 hours of
@@ -110,6 +116,10 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
     "Other SCA members and I will use consensus to make decisions & determine house and
     SCA policies, including those listed above.",
     "Upon joining the SCA, I will attend orientation workshops and trainings."] %}
+
+    <strong>BEFORE YOU BEGIN THIS APPLICATION, IT IS IMPORTANT THAT YOU UNDERSTAND A FEW
+    THINGS ABOUT THE CO-OPS. PLEASE INITIAL THE FOLLOWING POINTS TO INDICATE THAT
+    YOU UNDERSTAND AND AGREE TO THESE REQUIREMENTS:</strong><br>
 
     <ul>
     {% for i in agreements %}
@@ -149,6 +159,7 @@ APPROVED BY MEMBERSHIP:  </h5>
     </li>
     {% endfor %}
 </ol>
+
 <h5>YOUR APPLICATION AND DOCUMENTS CAN BE SUBMITTED ELECTRONICALLY TO
 SCA.WEOWNIT@GMAIL.COM ( ALL LOWERCASE)</h5>
 
@@ -163,170 +174,201 @@ DEPOSIT UPON MOVE IN.</strong><br>
 </div>
 <div class="tab-pane fade" id="personal-information" role="tabpanel" aria-labelledby="personal-information-tab">
 <h4>Personal Information & House Preference </h4>
-<ul>
- <li>
-    Full Legal Name
-    {{ form.personal.full_legal_name }}
-</li>
 
- <li>
+   <div class="form-group">
+        Full Legal Name
+        {{ form.personal.full_legal_name( class_="form-control") }}
+   </div>
+
+   <div class="form-group">
         Preferred name
-        {{ form.personal.preferred_name }}
-</li>
+        {{ form.personal.preferred_name( class_="form-control")  }}
+   </div>
 
- <li>
-     Select your preferred pronoun or add one
-     {{ form.personal.pronouns(list="id_datalist") }}
-     {% set entries = ["He/Him", "She/Her", "They/Their", "Zie/Zir", "Sie/Sir", "Ey/Eir"] %}
-     <datalist id="id_datalist">
+    <div class="form-group">
+        Select your preferred pronoun or add one
+        {{ form.personal.pronouns(list="id_datalist", class_="form-control") }}
+        {% set entries = ["He/Him", "She/Her", "They/Their", "Zie/Zir", "Sie/Sir", "Ey/Eir"] %}
+        <datalist id="id_datalist">
         {% for entry in entries %}
         <option value={{ entry }}>
         {% endfor %}
-    </datalist>
-</li>
-<li>
-        Date of Birth
-        {{ form.personal.dob }}
- </li>
+        </datalist>
+    </div>
 
- <li>
+    <div class="form-group">
+        Date of Birth
+        {{ form.personal.dob(class_="form-control") }}
+    </div>
+
+    <div class="form-group">
         Email
-        {{ form.personal.email }}
+        {{ form.personal.email(class_="form-control") }}
 
          Personal Phone
-         {{ form.personal.phone }}
- </li>
+         {{ form.personal.phone(class_="form-control") }}
+    </div>
+    <div class="form-group">
 
- <li>
+     
+    <div class="form-group">
         Address
-        {{ form.personal.permanent_address }}
- </li>
+        {{ form.personal.permanent_address(class_="form-control") }}
+ </div>
+    <div class="form-group">
 
- <li>
+     
+    <div class="form-group">
         Current Address
-        {{ form.personal.current_address }}
- </li>
+        {{ form.personal.current_address(class_="form-control") }}
+ </div>
+    <div class="form-group">
 
- <li>
+     
+    <div class="form-group">
         Check the term you wish to move in. If you’re flexible, mark multiple terms (Use command to select multiple). If you intend to move in during the middle of a term, please let us know
         <br>
-        {{ form.personal.move_in_term}}
+        {{ form.personal.move_in_term(class_="form-control") }}
         <br>
         Year
-        {{ form.personal.move_in_year }}
- </li>
+        {{ form.personal.move_in_year(class_="form-control") }}
+ </div>
+    <div class="form-group">
 
- <li>
+     
+    <div class="form-group">
         Have you ever been a resident or boarder of the SCA? (Check if apply)
-        {{ form.personal.was_boarder }}
+        {{ form.personal.was_boarder() }}
       <span id="was_boarder_checked" style="display: none;">
             Which year
-            {{ form.personal.years_boarder }}
+            {{ form.personal.years_boarder(class_="form-control") }}
       </span>
- </li>
+ </div>
+    <div class="form-group">
 
- <li>
+     
+    <div class="form-group">
 
         Have you ever been denied membership with the SCA? (Checking this option does not necessarily disqualify you from membership.)
-        {{ form.personal.denied_membership }}
- </li>
+        {{ form.personal.denied_membership() }}
+ </div>
+    <div class="form-group">
 
-<li>
+    
+    <div class="form-group">
     Have you ever had your membership or tenancy terminated by the SCA and/or another housing organization (Checking this question does not necessarily disqualify you from membership.) (Check if applies)
-    {{ form.personal.member_terminated }}
+    {{ form.personal.member_terminated() }}
      <span id="was_boarder_terminated" style="display: none;">
         If Yes, explain<br>
-        {{ form.personal.member_terminated_explanation }}
+        {{ form.personal.member_terminated_explanation(class_="form-control") }}
      </span>
-</li>
+</div>
+    <div class="form-group">
 
- <li>
+     
+    <div class="form-group">
         Type of Student
-        {{ form.personal.type_student }}
+        {{ form.personal.type_student(class_="form-control") }}
 
         <div id="is_student" style="display: none;">
 
         What institution of higher learning will you be enrolled in while living at the SCA?<br>
-        {{ form.personal.which_school }}<br>
+        {{ form.personal.which_school(class_="form-control") }}<br>
         School Year
-        {{ form.personal.school_year }}
+        {{ form.personal.school_year(class_="form-control") }}
 
         Credits
-        {{ form.personal.credits }}
+        {{ form.personal.credits(class_="form-control") }}
 
         Mayor
-        {{ form.personal.major }}
+        {{ form.personal.major(class_="form-control") }}
         </div>
- </li>
+ </div>
+    <div class="form-group">
 
-  <li>
+      
+    <div class="form-group">
+
+        {% set rating = ["First", "Second", "Third"] %}
       <p>Please prioritize your choice of houses, 1-3, and select your room size preference:</p>
       <h6>House Preference</h6>
-        {% for i in range(1,4) %}
-            Option {{ i }}
-            {{ form.personal.house_preference }}
+        {% for i in rating %}
+            {{ i }} Option
+            {{ form.personal.house_preference(class_="form-control") }}
             <br>
         {% endfor %}
       <br>
       <h6>Room Preference</h6>
-        {% for i in range(1,4) %}
-            Option {{ i }}
-            {{ form.personal.room_preference }}
+        {% for i in rating %}
+            {{ i }} Option
+            {{ form.personal.room_preference(class_="form-control") }}
             <br>
         {% endfor %}
       <br>
- </li>
-  <li>
+ </div>
+    <div class="form-group">
+      
+    <div class="form-group">
         If your choice of room or household is not available, would you be willing to be assigned to another house and/or room?
-        {{ form.personal.house_no_available }}
- </li>
+        {{ form.personal.house_no_available() }}
+ </div>
+    <div class="form-group">
 
-    <li>
+        
+    <div class="form-group">
         If you have a strong preference for one house or will only consider living in one or two of the houses, please let us know:
-        {{ form.personal.if_not_available }}
-    </li>
-  <li>
+        {{ form.personal.if_not_available() }}
+    </div>
+    <div class="form-group">
+      
+    <div class="form-group">
         Are you willing to be placed on a waiting list for an open housing spot?
-        {{ form.personal.waitlist }}
- </li>
+        {{ form.personal.waitlist() }}
+ </div>
+    <div class="form-group">
 
 
- <li>
+     
+    <div class="form-group">
         Allergies?
-        {{ form.personal.allergies }}
- </li>
+        {{ form.personal.allergies(class_="form-control") }}
+ </div>
+    <div class="form-group">
 
-  <li>
-        How long do you expect to live in these houses? If you don’t know /"
-                                 "that’s okay.
-        {{ form.personal.how_long }}
- </li>
+      
+    <div class="form-group">
+        How long do you expect to live in these houses? If you don’t know that’s okay.
+        {{ form.personal.how_long(class_="form-control") }}
+ </div>
+    <div class="form-group">
 
-  <li>
+      
+    <div class="form-group">
         Do you have a pet you’d like to bring?
         {{ form.personal.pet }}
 
       <div id="has_pet" style="display: none;">
         Pet Description:
-        {{ form.personal.pet_description }}
+        {{ form.personal.pet_description(class_="form-control") }}
 
         What are your pet’s needs (outdoor/indoor/other) and how they tend to interact with other animals?
-        {{ form.personal.pet_needs }}
+        {{ form.personal.pet_needs(class_="form-control") }}
       </div>
- </li>
+ </div>
+    <div class="form-group">
 
- <li>
+     
+    <div class="form-group">
         How did you hear about us?<br>
-        {{ form.personal.hear_about_us }}
+        {{ form.personal.hear_about_us(class_="form-control") }}
 
       <div id="other_hear" style="display: none;">
           If other, please, specify
-          {{ form.personal.if_other_about_us }}
+          {{ form.personal.if_other_about_us(class_="form-control") }}
       </div>
 
- </li>
+ </div>
 
-</ul>
 
         <a class="btn btn-primary btnPrevious">Previous</a>
     <a class="btn btn-primary btnNext">Next</a>

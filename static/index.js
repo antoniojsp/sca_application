@@ -40,7 +40,13 @@
            "value" : year          // values (or variables) here
         });
 
-        $("#today_date").val(new Date().toISOString().split('T')[0]);
+        var date = new Date().toISOString().split('T')[0];
+        $("#today_date").attr({
+           "min" : date,        // substitute your own
+           "value" : date          // values (or variables) here
+        });
+
+
     };
 
 // Previous and Next buttons
