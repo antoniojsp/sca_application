@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired, Length, Email
 
 class CoverForm(FlaskForm):
     full_name = StringField(validators=[DataRequired()],
-                            render_kw={'class':"cover", 'autocomplete': "off", "style":"width: 400px;"})
+                            render_kw={'class':"cover", 'autocomplete': "off", "style": "width: 400px;"})
     today_date = DateField(format='%m/%d/%y',
                            render_kw={'autocomplete': "off", 'class': "cover"},
                            validators=[DataRequired()])
@@ -24,13 +24,15 @@ class AgreementForm(Form):
 
 
 class ChecklistForm(Form):
-    check = BooleanField(render_kw={'class':'agreement'}, validators=[DataRequired()])
+    check = BooleanField(render_kw={'class': 'checklist'}, validators=[DataRequired()])
 
 
 class PersonalInformationForm(Form):
 
     style_short = "width: 120px;"
+    style_medium = "width: 300px;"
     style_long = "width: 500px;"
+
     full_legal_name = StringField(validators=[DataRequired()],
                                   render_kw={"style": "width: 400px;"})
     preferred_name = StringField(render_kw={"style": "width: 400px;"})
@@ -87,12 +89,12 @@ class PersonalInformationForm(Form):
 
     #JS Magic
     pet = BooleanField(render_kw={'onclick': "showStuff('has_pet')"})
-    pet_description = StringField(render_kw={"style": "width: 300px;"})
-    pet_needs = StringField(render_kw={"style": "width: 300px;"})
+    pet_description = StringField(render_kw={"style": style_long})
+    pet_needs = StringField(render_kw={"style": style_long})
     hear_about_us = SelectMultipleField(choices=["Radio", "Fb", "Craiglist", "Friend", "Other"],
                                         render_kw={"onclick": "show_if_selected(this.value, 'other_hear', 'Other')",
-                                                   "style": "width: 200px;"})
-    if_other_about_us = StringField()
+                                                   "style": style_medium})
+    if_other_about_us = StringField(render_kw={"style": style_medium})
 
 
 class ShortEssayForm(Form):
