@@ -11,9 +11,6 @@
 
 </head>
 <body onload="current_date()">
-
-
-
 <h1> Students’ Cooperative Association </h1>
 <h3>Membership Application</h3>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -237,7 +234,7 @@ DEPOSIT UPON MOVE IN.</strong><br>
      
     <div class="form-group">
         Have you ever been a resident or boarder of the SCA? (Check if apply)
-        {{ form.personal.was_boarder() }}
+        {{ form.personal.was_boarder(class_="form-control personal") }}
       <span id="was_boarder_checked" style="display: none;">
             Which year
             {{ form.personal.years_boarder(class_="form-control personal") }}
@@ -246,7 +243,6 @@ DEPOSIT UPON MOVE IN.</strong><br>
 
      
     <div class="form-group">
-
         Have you ever been denied membership with the SCA? (Checking this option does not necessarily disqualify you from membership.)
         {{ form.personal.denied_membership(class_="form-control personal") }}
     </div>
@@ -483,8 +479,5 @@ DEPOSIT UPON MOVE IN.</strong><br>
 
     <a class="btn btn-primary btnPrevious">Previous</a>
 </div>
-
-<!--&lt;!&ndash;            {{ form.submit}}&ndash;&gt;-->
-<!--&lt;!&ndash;            <button type="reset" id="clear" class="btn btn-success" onclick="clear_button()"> Clear </button>&ndash;&gt;-->
 </body>
 </html>

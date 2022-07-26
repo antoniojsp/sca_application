@@ -29,13 +29,13 @@ class ChecklistForm(Form):
 
 class PersonalInformationForm(Form):
 
-    style_short = "width: 120px;"
-    style_medium = "width: 300px;"
+    style_short = "width: 150px;"
+    style_medium = "width: 400px;"
     style_long = "width: 500px;"
-
+    style_check = "width:15px;"
     full_legal_name = StringField(validators=[DataRequired()],
-                                  render_kw={"style": "width: 400px;"})
-    preferred_name = StringField(render_kw={"style": "width: 400px;"})
+                                  render_kw={"style": style_medium})
+    preferred_name = StringField(render_kw={"style": style_medium})
     pronouns = StringField(render_kw={"style": "width: 200px;"})
 
     dob = DateField(format='%m/%d/%y',
@@ -45,12 +45,12 @@ class PersonalInformationForm(Form):
     email = StringField(validators=[DataRequired(), Email("This field requires a valid email address")],
                         render_kw={"placeholder": "example@mail.com",
                                    "type": "email",
-                                   "style": "width: 500px;"})
-    phone = IntegerField(validators=[DataRequired()], render_kw={"style": "width: 500px;"})
+                                   "style": style_long})
+    phone = IntegerField(validators=[DataRequired()], render_kw={"style": style_medium})
     permanent_address = StringField(validators=[DataRequired()],
-                                    render_kw={"style": "width: 500px;"})
+                                    render_kw={"style": style_long})
     current_address = StringField(validators=[DataRequired()],
-                                  render_kw={"style": "width: 500px;"})
+                                  render_kw={"style": style_long})
 
     my_choices = [('1', 'Fall'), ('2', 'Spring'), ('3', 'Summer'), ('4', "Winter")]
     move_in_term = SelectMultipleField(choices=my_choices,
@@ -60,12 +60,12 @@ class PersonalInformationForm(Form):
     move_in_year= IntegerField(validators= [DataRequired()], render_kw={"style": style_short})
 
     # JS Magic
-    was_boarder = BooleanField(render_kw={'onclick': "showStuff('was_boarder_checked')"})
+    was_boarder = BooleanField(render_kw={"style": style_check, 'onclick': "showStuff('was_boarder_checked')"})
     years_boarder = IntegerField(render_kw={"min": "1920", "max": "2022", "style": style_short})
 
-    denied_membership = BooleanField()
+    denied_membership = BooleanField(render_kw={"style": style_check})
 
-    member_terminated = BooleanField(render_kw={"onclick": "showStuff('was_boarder_terminated')"})
+    member_terminated = BooleanField(render_kw={"onclick": "showStuff('was_boarder_terminated')", "style": style_check})
     member_terminated_explanation = TextAreaField(render_kw={"rows": "12", "cols": "150"})
 
     type_student = SelectField(choices=["Non Student", "Undergrad", "Graduate", "Post-Baccalaureate"],
@@ -81,20 +81,20 @@ class PersonalInformationForm(Form):
     room_preference = SelectField(choices=["None", "Single", "Small Single", "Double"],
                                   render_kw={"style": style_short})
 
-    house_no_available = BooleanField()
-    if_not_available = BooleanField()
-    waitlist = BooleanField()
+    house_no_available = BooleanField(render_kw={"style": style_check})
+    if_not_available = BooleanField(render_kw={"style": style_check})
+    waitlist = BooleanField(render_kw={"style": style_check})
     allergies = StringField(render_kw={"style": "width: 300px;"})
     how_long = StringField(render_kw={"style": "width: 300px;"})
 
     #JS Magic
-    pet = BooleanField(render_kw={'onclick': "showStuff('has_pet')"})
+    pet = BooleanField(render_kw={'onclick': "showStuff('has_pet')", "style": style_check})
     pet_description = StringField(render_kw={"style": style_long})
     pet_needs = StringField(render_kw={"style": style_long})
     hear_about_us = SelectMultipleField(choices=["Radio", "Fb", "Craiglist", "Friend", "Other"],
                                         render_kw={"onclick": "show_if_selected(this.value, 'other_hear', 'Other')",
                                                    "style": style_medium})
-    if_other_about_us = StringField(render_kw={"style": style_medium})
+    if_other_about_us = StringField(render_kw={"style": style_long})
 
 
 class ShortEssayForm(Form):
