@@ -12,6 +12,8 @@
 </head>
 <body onload="current_date()">
 
+
+
 <h1> Students’ Cooperative Association </h1>
 <h3>Membership Application</h3>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -50,6 +52,7 @@
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
+
 <div class="tab-pane fade show active" id="coverpage" role="tabpanel" aria-labelledby="coverpage-tab">
 
     {{ form.cover.csrf_token }}
@@ -77,7 +80,7 @@ have not heard from us by that time, please call or email to ensure we have rece
 Applicants will be considered for membership as openings occur; we do not have specific
 application deadlines. When there are no current openings, we will keep applications in a pool
 for up to one year. Applicants will be evaluated according to the following criteria:<br>
-
+</p>
 <ul>
     <li>
         Interest in the cooperative life and ability to work in a cooperative manner
@@ -90,6 +93,7 @@ for up to one year. Applicants will be evaluated according to the following crit
     </li>
 </ul>
 
+<p>
 Membership Diversity and other house-specific needs may be taken into consideration.<br>
 If you have any questions or need help filling out this application, please contact us at
 sca.weownit@gmail.com. In addition, we have a google form application available at this link
@@ -177,7 +181,7 @@ DEPOSIT UPON MOVE IN.</strong><br>
 
    <div class="form-group">
         Full Legal Name
-        {{ form.personal.full_legal_name( class_="form-control") }}
+        {{ form.personal.full_legal_name( class_="form-control personal") }}
    </div>
 
    <div class="form-group">
@@ -500,6 +504,7 @@ DEPOSIT UPON MOVE IN.</strong><br>
 </div>
 <div class="tab-pane fade" id="submit" role="tabpanel" aria-labelledby="submit-tab">
     <input id="submit_form" type="submit" value="Submit">
+
     <a class="btn btn-primary btnPrevious">Previous</a>
 </div>
 
