@@ -185,12 +185,12 @@ DEPOSIT UPON MOVE IN.</strong><br>
 
    <div class="form-group">
         Preferred name
-        {{ form.personal.preferred_name( class_="form-control")  }}
+        {{ form.personal.preferred_name( class_="form-control personal")  }}
    </div>
 
     <div class="form-group">
         Select your preferred pronoun or add one
-        {{ form.personal.pronouns(list="id_datalist", class_="form-control") }}
+        {{ form.personal.pronouns(list="id_datalist", class_="form-control personal") }}
         {% set entries = ["He/Him", "She/Her", "They/Their", "Zie/Zir", "Sie/Sir", "Ey/Eir"] %}
         <datalist id="id_datalist">
         {% for entry in entries %}
@@ -201,37 +201,37 @@ DEPOSIT UPON MOVE IN.</strong><br>
 
     <div class="form-group">
         Date of Birth
-        {{ form.personal.dob(class_="form-control") }}
+        {{ form.personal.dob(class_="form-control personal") }}
     </div>
 
     <div class="form-group">
         Email
-        {{ form.personal.email(class_="form-control") }}
+        {{ form.personal.email(class_="form-control personal") }}
 
          Personal Phone
-         {{ form.personal.phone(class_="form-control") }}
+         {{ form.personal.phone(class_="form-control personal") }}
     </div>
 
      
     <div class="form-group">
         Address
-        {{ form.personal.permanent_address(class_="form-control") }}
+        {{ form.personal.permanent_address(class_="form-control personal") }}
     </div>
 
      
     <div class="form-group">
         Current Address
-        {{ form.personal.current_address(class_="form-control") }}
+        {{ form.personal.current_address(class_="form-control personal") }}
      </div>
 
      
     <div class="form-group">
         Check the term you wish to move in. If you’re flexible, mark multiple terms (Use command to select multiple). If you intend to move in during the middle of a term, please let us know
         <br>
-        {{ form.personal.move_in_term(class_="form-control") }}
+        {{ form.personal.move_in_term(class_="form-control personal") }}
         <br>
         Year
-        {{ form.personal.move_in_year(class_="form-control") }}
+        {{ form.personal.move_in_year(class_="form-control personal") }}
     </div>
 
      
@@ -240,7 +240,7 @@ DEPOSIT UPON MOVE IN.</strong><br>
         {{ form.personal.was_boarder() }}
       <span id="was_boarder_checked" style="display: none;">
             Which year
-            {{ form.personal.years_boarder(class_="form-control") }}
+            {{ form.personal.years_boarder(class_="form-control personal") }}
       </span>
     </div>
 
@@ -248,7 +248,7 @@ DEPOSIT UPON MOVE IN.</strong><br>
     <div class="form-group">
 
         Have you ever been denied membership with the SCA? (Checking this option does not necessarily disqualify you from membership.)
-        {{ form.personal.denied_membership() }}
+        {{ form.personal.denied_membership(class_="form-control personal") }}
     </div>
     
     <div class="form-group">
@@ -256,27 +256,27 @@ DEPOSIT UPON MOVE IN.</strong><br>
     {{ form.personal.member_terminated() }}
      <span id="was_boarder_terminated" style="display: none;">
         If Yes, explain<br>
-        {{ form.personal.member_terminated_explanation(class_="form-control") }}
+        {{ form.personal.member_terminated_explanation(class_="form-control personal") }}
      </span>
     </div>
 
      
     <div class="form-group">
         Type of Student
-        {{ form.personal.type_student(class_="form-control") }}
+        {{ form.personal.type_student(class_="form-control personal") }}
 
         <div id="is_student" style="display: none;">
 
         What institution of higher learning will you be enrolled in while living at the SCA?<br>
-        {{ form.personal.which_school(class_="form-control") }}<br>
+        {{ form.personal.which_school(class_="form-control personal") }}<br>
         School Year
-        {{ form.personal.school_year(class_="form-control") }}
+        {{ form.personal.school_year(class_="form-control personal") }}
 
         Credits
-        {{ form.personal.credits(class_="form-control") }}
+        {{ form.personal.credits(class_="form-control personal") }}
 
         Mayor
-        {{ form.personal.major(class_="form-control") }}
+        {{ form.personal.major(class_="form-control personal") }}
         </div>
     </div>
 
@@ -287,14 +287,14 @@ DEPOSIT UPON MOVE IN.</strong><br>
       <h6>House Preference</h6>
         {% for i in rating %}
             {{ i }} Option
-            {{ form.personal.house_preference(class_="form-control") }}
+            {{ form.personal.house_preference(class_="form-control personal") }}
             <br>
         {% endfor %}
       <br>
       <h6>Room Preference</h6>
         {% for i in rating %}
             {{ i }} Option
-            {{ form.personal.room_preference(class_="form-control") }}
+            {{ form.personal.room_preference(class_="form-control personal") }}
             <br>
         {% endfor %}
       <br>
@@ -302,50 +302,50 @@ DEPOSIT UPON MOVE IN.</strong><br>
 
     <div class="form-group">
         If your choice of room or household is not available, would you be willing to be assigned to another house and/or room?
-        {{ form.personal.house_no_available() }}
+        {{ form.personal.house_no_available(class_="form-control personal") }}
     </div>
 
         
     <div class="form-group">
         If you have a strong preference for one house or will only consider living in one or two of the houses, please let us know:
-        {{ form.personal.if_not_available() }}
+        {{ form.personal.if_not_available(class_="form-control personal") }}
     </div>
 
     <div class="form-group">
         Are you willing to be placed on a waiting list for an open housing spot?
-        {{ form.personal.waitlist() }}
+        {{ form.personal.waitlist(class_="form-control personal") }}
     </div>
 
     <div class="form-group">
         Allergies?
-        {{ form.personal.allergies(class_="form-control") }}
+        {{ form.personal.allergies(class_="form-control personal") }}
  </div>
       
     <div class="form-group">
         How long do you expect to live in these houses? If you don’t know that’s okay.
-        {{ form.personal.how_long(class_="form-control") }}
+        {{ form.personal.how_long(class_="form-control personal") }}
  </div>
       
     <div class="form-group">
         Do you have a pet you’d like to bring?
-        {{ form.personal.pet }}
+        {{ form.personal.pet(class_="form-control personal") }}
 
       <div id="has_pet" style="display: none;">
         Pet Description:
-        {{ form.personal.pet_description(class_="form-control") }}
+        {{ form.personal.pet_description(class_="form-control personal") }}
 
         What are your pet’s needs (outdoor/indoor/other) and how they tend to interact with other animals?
-        {{ form.personal.pet_needs(class_="form-control") }}
+        {{ form.personal.pet_needs(class_="form-control personal") }}
       </div>
  </div>
      
     <div class="form-group">
         How did you hear about us?<br>
-        {{ form.personal.hear_about_us(class_="form-control") }}
+        {{ form.personal.hear_about_us(class_="form-control personal") }}
 
       <div id="other_hear" style="display: none;">
           If other, please, specify
-          {{ form.personal.if_other_about_us(class_="form-control") }}
+          {{ form.personal.if_other_about_us(class_="form-control personal") }}
       </div>
 
  </div>

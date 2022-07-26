@@ -64,32 +64,35 @@ $(document).ready ( function () {
 
     });
 
-
+function input_dict(dict){
+    var information_package = {}
+    for (let i = 0; i < dict.length; i++) {
+      information_package[dict[i].id] = dict[i].value
+    }
+    return information_package
+}
 $(document).ready ( function () {
     $('#submit_form').click(function(){
 
-       var classes = ['cover', 'agreement']
-//       var cover = document.getElementsByClassName('cover');
-       var cover = document.getElementsByClassName('agreement');
-       var csrf = document.getElementById('csrf_token').value;
-        $("#csrf_token").val("Dolly")
-        console.log(csrf)
+       var classes = ['cover', 'agreement', 'form-control personal']
+       var cover = document.getElementsByClassName('form-control personal');
+//       var cover = document.getElementsByClassName('agreement');
+//       var csrf = document.getElementById('csrf_token').value;
 
-       var information_package = {}
-       for (let i = 0; i < cover.length; i++) {
-          information_package[cover[i].id] = cover[i].value
-        }
+//        console.log(cover)
 
-        console.log(information_package)
+        console.log(input_dict(cover))
 
 
 
-        var submit_data = {"data":JSON.stringify(csrf)}
-            $.getJSON( "/_submit",
-                {"lal":csrf},
-                function(data) {
-                }
-             );
+
+
+//        var submit_data = {"data":JSON.stringify(csrf)}
+//            $.getJSON( "/_submit",
+//                {"lal":csrf},
+//                function(data) {
+//                }
+//             );
     });
 });
 
