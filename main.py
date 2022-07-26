@@ -32,7 +32,7 @@ def index():
 
 @app.route('/_submit',  methods=[ 'GET', 'POST' ])
 def _submit():
-    package = request.args.get("data")
+    package = request.args.get("lal")
     import sys
     print(package)
     return jsonify(result={"response": "hola"})

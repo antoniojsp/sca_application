@@ -69,9 +69,11 @@ $(document).ready ( function () {
     $('#submit_form').click(function(){
 
        var classes = ['cover', 'agreement']
-       var cover = document.getElementsByClassName('cover');
-       var agreement = document.getElementsByClassName('agreement');
-
+//       var cover = document.getElementsByClassName('cover');
+       var cover = document.getElementsByClassName('agreement');
+       var csrf = document.getElementById('csrf_token').value;
+        $("#csrf_token").val("Dolly")
+        console.log(csrf)
 
        var information_package = {}
        for (let i = 0; i < cover.length; i++) {
@@ -79,15 +81,15 @@ $(document).ready ( function () {
         }
 
         console.log(information_package)
-//
-//
-//
-//        var submit_data = {"data":JSON.stringify(information_package)}
-//            $.getJSON( "/_submit",
-//                submit_data,
-//                function(data) {
-//                }
-//             );
+
+
+
+        var submit_data = {"data":JSON.stringify(csrf)}
+            $.getJSON( "/_submit",
+                {"lal":csrf},
+                function(data) {
+                }
+             );
     });
 });
 
