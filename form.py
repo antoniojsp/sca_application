@@ -98,11 +98,11 @@ class PersonalInformationForm(Form):
 
 
 class ShortEssayForm(Form):
-    question = TextAreaField(render_kw={"rows": "12", "cols": "150"})
+    question = TextAreaField(render_kw={"class": "essay", "rows": "12", "cols": "150"})
 
 
 class AutobiographicalForm(Form):
-    question = TextAreaField(render_kw={"rows": "12", "cols": "150"})
+    question = TextAreaField(render_kw={"class": "auto", "rows": "12", "cols": "150"})
 
 
 class Range(Form):
@@ -110,18 +110,19 @@ class Range(Form):
                                                         "max": 10,
                                                         "step": 1,
                                                         "style": "width:500px;"})
-    input = IntegerField(render_kw={"type": "number",
+    input = IntegerField(render_kw={"class": "range", "type": "number",
                                     "value": "5",
                                     "min": "0",
                                     "max": "10"})
-    comment = StringField("Comments:", render_kw={"placeholder": "Comments"})
+    comment = StringField("Comments:", render_kw={"class": "range",
+                                                  "placeholder": "Comments"})
 
 
 class References(Form):
-    name = StringField(label="Name")
-    relationship = StringField(label="Relationship")
-    email = StringField(label="Email", validators=[DataRequired(), Email()])
-    phone = StringField('Phone', validators=[DataRequired()])
+    name = StringField(label="Name", render_kw={"class": "reference"})
+    relationship = StringField(label="Relationship", render_kw={"class": "reference"})
+    email = StringField(label="Email", validators=[DataRequired(), Email()], render_kw={"class": "reference"})
+    phone = StringField('Phone', validators=[DataRequired()], render_kw={"class": "reference"})
 
 
     # submit = SubmitField(label="Shorten",

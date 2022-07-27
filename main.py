@@ -30,11 +30,13 @@ def index():
 
     return render_template("index.html", form=form)
 
-@app.route('/_submit',  methods=[ 'GET', 'POST' ])
+
+@app.route('/_submit')
 def _submit():
-    package = request.args.get("lal")
-    import sys
-    print(package)
+    package = request.args.get("data")
+    import json
+    out = json.loads(package)
+    print(out[0])
     return jsonify(result={"response": "hola"})
 
 

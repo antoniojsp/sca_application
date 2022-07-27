@@ -64,35 +64,38 @@ $(document).ready ( function () {
 
     });
 
-function input_dict(dict){
+function input_dict(name){
     var information_package = {}
-    for (let i = 0; i < dict.length; i++) {
-      information_package[dict[i].id] = dict[i].value
+    var cover = document.getElementsByClassName(name);
+
+    for (let i = 0; i < cover.length; i++) {
+      information_package[cover[i].id] = cover[i].value
     }
     return information_package
-}
+};
+
 $(document).ready ( function () {
     $('#submit_form').click(function(){
 
-       var classes = ['cover', 'agreement', 'form-control personal']
-       var cover = document.getElementsByClassName('form-control personal');
-//       var cover = document.getElementsByClassName('agreement');
-//       var csrf = document.getElementById('csrf_token').value;
+       var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
 
-//        console.log(cover)
+        var data_elements = []
 
-        console.log(input_dict(cover))
+        for (var i = 0; i<classes.length; i++){
+            data_elements.push(input_dict(classes[i]))
+        }
 
-
-
+        console.log(data_elements)
 
 
-//        var submit_data = {"data":JSON.stringify(csrf)}
-//            $.getJSON( "/_submit",
-//                {"lal":csrf},
-//                function(data) {
-//                }
-//             );
+
+        var submit_data = {"data":JSON.stringify(data_elements)}
+
+            $.getJSON( "/_submit",
+                submit_data,
+                function(data) {
+                }
+             );
     });
 });
 
