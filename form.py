@@ -24,7 +24,7 @@ class AgreementForm(Form):
 
 
 class ChecklistForm(Form):
-    check = BooleanField(render_kw={'class': 'checklist'}, validators=[DataRequired()])
+    check = BooleanField(render_kw={'class': 'checklist'})
 
 
 class PersonalInformationForm(Form):
@@ -42,8 +42,7 @@ class PersonalInformationForm(Form):
                     validators=[DataRequired()],
                     render_kw={'autocomplete': "off",
                                "style": "width: 150px;"})
-    email = StringField(validators=[DataRequired(), Email("This field requires a valid email address")],
-                        render_kw={"placeholder": "example@mail.com",
+    email = StringField(render_kw={"placeholder": "example@mail.com",
                                    "type": "email",
                                    "style": style_long})
     phone = IntegerField(validators=[DataRequired()], render_kw={"style": style_medium})

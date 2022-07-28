@@ -36,7 +36,7 @@ def _submit():
     package = request.args.get("data")
     import json
     out = json.loads(package)
-    print(out[0])
+    print(out)
     return jsonify(result={"response": "hola"})
 
 

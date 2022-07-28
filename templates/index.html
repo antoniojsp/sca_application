@@ -52,9 +52,10 @@
 <div class="tab-pane fade show active" id="coverpage" role="tabpanel" aria-labelledby="coverpage-tab">
 
     {{ form.cover.csrf_token }}
-    Full Name
+    Obligatory fields <small>(*)</small> <br>
+    Full Name <small>(*)</small>
     {{ form.cover.full_name }}
-    Today's date
+    Today's date<small>(*)</small>
     {{ form.cover.today_date }}
 
 <p style="text-align: center;">
@@ -124,7 +125,7 @@ submit your application that way. https://forms.gle/P1grduxCA2j3MGtN8<br>
     <ul>
     {% for i in agreements %}
         <li>
-        {{ form.agreement.initials(id= "initials" ~ loop.index) }}
+        {{ form.agreement.initials(id= "initials" ~ loop.index) }}<small>(*)</small>
         {{ i }}
         </li>
     {% endfor %}
@@ -139,7 +140,7 @@ APPROVED BY MEMBERSHIP:  </h5>
 
     {% set checklist = [
     "Completed application. Please print or type. If filling out an application by hand, use black
-    or blue pen only.",
+    or blue pen only. ",
     "Proof of income: Written proof of your source of income you will use to pay for your living
     expenses. I.e. copy of your most recent bank statement or pay stub, offer for financial aid, or a
     letter from your parents or other responsible party stating that they will be supporting you.",
@@ -176,7 +177,7 @@ DEPOSIT UPON MOVE IN.</strong><br>
 <h4>Personal Information & House Preference </h4>
 
    <div class="form-group">
-        Full Legal Name
+        Full Legal Name<small>(*)</small>
         {{ form.personal.full_legal_name( class_="form-control personal") }}
    </div>
 
@@ -197,33 +198,33 @@ DEPOSIT UPON MOVE IN.</strong><br>
     </div>
 
     <div class="form-group">
-        Date of Birth
+        Date of Birth<small>(*)</small>
         {{ form.personal.dob(class_="form-control personal") }}
     </div>
 
     <div class="form-group">
-        Email
+        Email<small>(*)</small>
         {{ form.personal.email(class_="form-control personal") }}
 
-         Personal Phone
+         Personal Phone<small>(*)</small>
          {{ form.personal.phone(class_="form-control personal") }}
     </div>
 
      
     <div class="form-group">
-        Address
+        Address<small>(*)</small>
         {{ form.personal.permanent_address(class_="form-control personal") }}
     </div>
 
      
     <div class="form-group">
-        Current Address
+        Current Address<small>(*)</small>
         {{ form.personal.current_address(class_="form-control personal") }}
      </div>
 
      
     <div class="form-group">
-        Check the term you wish to move in. If you’re flexible, mark multiple terms (Use command to select multiple). If you intend to move in during the middle of a term, please let us know
+        Check the term you wish to move in. If you’re flexible, mark multiple terms (Use command to select multiple). If you intend to move in during the middle of a term, please let us know<small>(*)</small>
         <br>
         {{ form.personal.move_in_term(class_="form-control personal") }}
         <br>
@@ -435,7 +436,7 @@ DEPOSIT UPON MOVE IN.</strong><br>
       {% for i in moods %}
         <li>
           {{ i[0] }}
-          {{ form.range.range(id="range"~ loop.index, oninput= "amount" ~ loop.index ~ ".value=range" ~ loop.index ~ ".value")  }} {{ i[1] }}
+          {{ form.range.range(id="range"~ loop.index, oninput= "amount" ~ loop.index ~ ".value=range" ~ loop.index ~ ".value")  }}
           {{ i[1] }}
           {{ form.range.input(id="amount"~loop.index, oninput= "range" ~ loop.index ~ ".value=amount" ~ loop.index ~ ".value") }}<br>
           {{ form.range.comment.label(id="comment"~loop.index) }}

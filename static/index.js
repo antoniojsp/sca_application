@@ -69,8 +69,13 @@ function input_dict(name){
     var cover = document.getElementsByClassName(name);
 
     for (let i = 0; i < cover.length; i++) {
-      information_package[cover[i].id] = cover[i].value
+      if (cover[i].type == "checkbox"){
+        information_package[cover[i].id] = cover[i].checked
+      }else{
+        information_package[cover[i].id] = cover[i].value
+      }
     }
+
     return information_package
 };
 
@@ -79,17 +84,43 @@ $(document).ready ( function () {
 
        var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
 
-        var data_elements = []
+        var data_dict = {}
 
         for (var i = 0; i<classes.length; i++){
-            data_elements.push(input_dict(classes[i]))
+            data_dict[classes[i]] = input_dict(classes[i])
         }
 
-        console.log(data_elements)
+        var alarma = ""
+        if (data_dict['cover'].full_name == ""){
+            alarma += "Missing Full name\n";
+        }
+        else if (data_dict['cover'].today_date == ""){
+            alarma += "Missing Today's date\n";
+        }
+
+        var count = 0
+        for ( i in data_dict['agreement']){
+            if (console.log(data_dict['agreement'][i]) != ""){
+                count++;
+            }
+        }
+
+        if (count != 5){
+            alarma += "Check initials.\n"
+        }
+
+        data_dict['form-control personal']
 
 
 
-        var submit_data = {"data":JSON.stringify(data_elements)}
+
+
+        if (alarma != ""){
+            alert(alarma);
+        }
+
+
+        var submit_data = {"data":JSON.stringify(data_dict)}
 
             $.getJSON( "/_submit",
                 submit_data,
