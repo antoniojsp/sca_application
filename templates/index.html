@@ -228,14 +228,13 @@ DEPOSIT UPON MOVE IN.</strong><br>
         <br>
         {{ form.personal.move_in_term(class_="form-control personal") }}
         <br>
-        Year
+        Year<small>(*)</small>
         {{ form.personal.move_in_year(class_="form-control personal") }}
     </div>
 
      
     <div class="form-group">
-        Have you ever been a resident or boarder of the SCA? (Check if apply)
-        {{ form.personal.was_boarder(class_="form-control personal") }}
+        Have you ever been a resident or boarder of the SCA? (Check if apply): <strong>YES </strong> {{ form.personal.was_boarder(class_="form-control personal") }}
       <span id="was_boarder_checked" style="display: none;">
             Which year
             {{ form.personal.years_boarder(class_="form-control personal") }}
@@ -259,7 +258,7 @@ DEPOSIT UPON MOVE IN.</strong><br>
 
      
     <div class="form-group">
-        Type of Student
+        Type of Student<small>(*)</small>
         {{ form.personal.type_student(class_="form-control personal") }}
 
         <div id="is_student" style="display: none;">
@@ -281,17 +280,17 @@ DEPOSIT UPON MOVE IN.</strong><br>
 
         {% set rating = ["First", "Second", "Third"] %}
       <p>Please prioritize your choice of houses, 1-3, and select your room size preference:</p>
-      <h6>House Preference</h6>
+      <h6>House Preference<small>(*)</small></h6>
         {% for i in rating %}
             {{ i }} Option
-            {{ form.personal.house_preference(class_="form-control personal") }}
+            {{ form.personal.house_preference(class_="form-control personal", id="house_preference" ~ loop.index) }}
             <br>
         {% endfor %}
       <br>
-      <h6>Room Preference</h6>
+      <h6>Room Preference<small>(*)</small></h6>
         {% for i in rating %}
             {{ i }} Option
-            {{ form.personal.room_preference(class_="form-control personal") }}
+            {{ form.personal.room_preference(class_="form-control personal", id="room_preference" ~ loop.index) }}
             <br>
         {% endfor %}
       <br>

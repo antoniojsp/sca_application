@@ -91,34 +91,33 @@ $(document).ready ( function () {
         }
 
         var alarma = ""
+
+//        cover tab
         if (data_dict['cover'].full_name == ""){
             alarma += "Missing Full name\n";
         }
-        else if (data_dict['cover'].today_date == ""){
+        if (data_dict['cover'].today_date == ""){
             alarma += "Missing Today's date\n";
         }
 
-        var count = 0
+//        agreement tab
         for ( i in data_dict['agreement']){
-            if (console.log(data_dict['agreement'][i]) != ""){
-                count++;
+            if (data_dict['agreement'][i] == ""){
+                alarma += "Check initials (Agreement Terms' tab)\n"
+                break
             }
         }
 
-        if (count != 5){
-            alarma += "Check initials.\n"
+//        personal information tab
+   // essay tab
+
+        for (i in data_dict['essay']){
+            console.log(data_dict['essay'][i])
         }
-
-        data_dict['form-control personal']
-
-
-
-
 
         if (alarma != ""){
             alert(alarma);
         }
-
 
         var submit_data = {"data":JSON.stringify(data_dict)}
 
