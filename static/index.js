@@ -79,6 +79,16 @@ function input_dict(name){
     return information_package
 };
 
+function check_inputs(tab, message){
+        for ( i in data_dict[tab]){
+            if (data_dict['agreement'][i] == ""){
+                message += "Check initials (Agreement Terms' tab)\n"
+                break
+            };
+        };
+};
+
+
 $(document).ready ( function () {
     $('#submit_form').click(function(){
 
@@ -108,11 +118,28 @@ $(document).ready ( function () {
             }
         }
 
-//        personal information tab
-   // essay tab
+        for (i in data_dict['form-control personal']){
+            if (data_dict['form-control personal'][i] == ""){
+                alarma += "Missing Personal Information
+
+                 Question (Short Essay Section Tab)"
+                break
+            }
+        }
+
 
         for (i in data_dict['essay']){
-            console.log(data_dict['essay'][i])
+            if (data_dict['essay'][i] == ""){
+                alarma += "Missing Essay Question (Short Essay Section Tab)"
+                break
+            }
+        }
+
+        for (i in data_dict['auto']){
+            if (data_dict['auto'][i] == ""){
+                alarma += "Missing Auto Question (Short Essay Section Tab)"
+                break
+            }
         }
 
         if (alarma != ""){
