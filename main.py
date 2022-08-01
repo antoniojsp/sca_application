@@ -3,10 +3,12 @@ from form import CoverForm, AgreementForm, \
                  ChecklistForm, PersonalInformationForm, \
                  ShortEssayForm, AutobiographicalForm, \
                  References, Range
+from database import *
+
 app = Flask(__name__)
 
 app.secret_key = "maria"
-
+db = Database()
 
 @app.route('/')
 def index():
@@ -37,6 +39,7 @@ def _submit():
     import json
     out = json.loads(package)
     print(out)
+    db.insert(out)
     return jsonify(result={"response": "hola"})
 
 

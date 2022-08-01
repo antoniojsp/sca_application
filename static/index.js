@@ -79,13 +79,14 @@ function input_dict(name){
     return information_package
 };
 
-function check_inputs(tab, message){
+function check_inputs(data_dict, tab, message){
         for ( i in data_dict[tab]){
-            if (data_dict['agreement'][i] == ""){
-                message += "Check initials (Agreement Terms' tab)\n"
-                break
+            if (data_dict[tab][i] == ""){
+                return message + "\n"
             };
         };
+
+        return ""
 };
 
 
@@ -93,57 +94,26 @@ $(document).ready ( function () {
     $('#submit_form').click(function(){
 
        var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
-
+//
         var data_dict = {}
 
         for (var i = 0; i<classes.length; i++){
-            data_dict[classes[i]] = input_dict(classes[i])
+            data_dict[classes[i]] = input_dict(classes[i]);
         }
 
-        var alarma = ""
+        console.log(data_dict);
 
-//        cover tab
-        if (data_dict['cover'].full_name == ""){
-            alarma += "Missing Full name\n";
-        }
-        if (data_dict['cover'].today_date == ""){
-            alarma += "Missing Today's date\n";
-        }
+        var alarma = "";
 
-//        agreement tab
-        for ( i in data_dict['agreement']){
-            if (data_dict['agreement'][i] == ""){
-                alarma += "Check initials (Agreement Terms' tab)\n"
-                break
-            }
-        }
+        alarma += check_inputs(data_dict, classes[0], "Check cover page tab")
+        alarma += check_inputs(data_dict, classes[1], "Check agreement tab")
+        alarma += check_inputs(data_dict, classes[4], "Check essay tab")
+        alarma += check_inputs(data_dict, classes[5], "Check essay tab")
 
-        for (i in data_dict['form-control personal']){
-            if (data_dict['form-control personal'][i] == ""){
-                alarma += "Missing Personal Information
-
-                 Question (Short Essay Section Tab)"
-                break
-            }
-        }
-
-
-        for (i in data_dict['essay']){
-            if (data_dict['essay'][i] == ""){
-                alarma += "Missing Essay Question (Short Essay Section Tab)"
-                break
-            }
-        }
-
-        for (i in data_dict['auto']){
-            if (data_dict['auto'][i] == ""){
-                alarma += "Missing Auto Question (Short Essay Section Tab)"
-                break
-            }
-        }
 
         if (alarma != ""){
             alert(alarma);
+
         }
 
         var submit_data = {"data":JSON.stringify(data_dict)}
@@ -151,6 +121,7 @@ $(document).ready ( function () {
             $.getJSON( "/_submit",
                 submit_data,
                 function(data) {
+                console.log("Data sent")
                 }
              );
     });
