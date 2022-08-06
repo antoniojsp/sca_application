@@ -69,6 +69,7 @@ function input_dict(name){
     var cover = document.getElementsByClassName(name);
 
     for (let i = 0; i < cover.length; i++) {
+
       if (cover[i].type == "checkbox"){
         information_package[cover[i].id] = cover[i].checked
       }else{
@@ -90,7 +91,7 @@ function check_inputs(data_dict, tab, message){
 };
 
 
-$(document).ready ( function () {
+$(document).ready (function (){
     $('#submit_form').click(function(){
 
        var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
@@ -101,14 +102,21 @@ $(document).ready ( function () {
             data_dict[classes[i]] = input_dict(classes[i]);
         }
 
-        console.log(data_dict);
+
+        var cover = data_dict['cover']
+
 
         var alarma = "";
 
-        alarma += check_inputs(data_dict, classes[0], "Check cover page tab")
-        alarma += check_inputs(data_dict, classes[1], "Check agreement tab")
-        alarma += check_inputs(data_dict, classes[4], "Check essay tab")
-        alarma += check_inputs(data_dict, classes[5], "Check essay tab")
+        alarma += check_inputs(data_dict, classes[0], "Check cover page tab");
+        alarma += check_inputs(data_dict, classes[1], "Check agreement tab");
+
+        var personal = data_dict['form-control personal'];
+        console.log(personal.full_legal_name);
+
+
+        alarma += check_inputs(data_dict, classes[4], "Check essay tab");
+        alarma += check_inputs(data_dict, classes[5], "Check essay tab");
 
 
         if (alarma != ""){
@@ -118,12 +126,12 @@ $(document).ready ( function () {
 
         var submit_data = {"data":JSON.stringify(data_dict)}
 
-            $.getJSON( "/_submit",
-                submit_data,
-                function(data) {
-                console.log("Data sent")
-                }
-             );
+//            $.getJSON( "/_submit",
+//                submit_data,
+//                function(data) {
+//                console.log("Data sent")
+//                }
+//             );
     });
 });
 
