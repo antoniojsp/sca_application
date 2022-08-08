@@ -44,7 +44,8 @@ class PersonalInformationForm(Form):
                                "style": "width: 150px;"})
     email = StringField(render_kw={"placeholder": "example@mail.com",
                                    "type": "email",
-                                   "style": style_long})
+                                   "style": style_long},
+                    validators = [DataRequired()])
     phone = IntegerField(validators=[DataRequired()], render_kw={"style": style_medium})
     permanent_address = StringField(validators=[DataRequired()],
                                     render_kw={"style": style_long})
@@ -58,18 +59,21 @@ class PersonalInformationForm(Form):
 
     move_in_year= IntegerField(validators= [DataRequired()], render_kw={"style": style_short})
 
-    # JS Magic
-    was_boarder = BooleanField(render_kw={"style": style_check, 'onclick': "showStuff('was_boarder_checked')"})
+    # SHOW AND HIDE
+    was_boarder = BooleanField(render_kw={"style": style_check,
+                                          'onclick': "showStuff('was_boarder_checked',['years_boarder'])"})
     years_boarder = IntegerField(render_kw={"min": "1920", "max": "2022", "style": style_short})
 
     denied_membership = BooleanField(render_kw={"style": style_check})
 
-    member_terminated = BooleanField(render_kw={"onclick": "showStuff('was_boarder_terminated')", "style": style_check})
+    member_terminated = BooleanField(render_kw={"onclick": "showStuff('was_boarder_terminated', ['member_terminated_explanation'])", "style": style_check})
     member_terminated_explanation = TextAreaField(render_kw={"rows": "12", "cols": "150"})
 
     type_student = SelectField(choices=["Non Student", "Undergrad", "Graduate", "Post-Baccalaureate"],
                                render_kw={"onchange": "hide_if_selected(this.value, 'is_student', 'Non Student')",
-                                          "style": style_short})
+                                          "style": style_short},
+                               validators=[DataRequired()])
+
     which_school = StringField(render_kw={"style": "width: 300px;"})
     school_year = IntegerField(render_kw={"style": style_short})
     credits = IntegerField(render_kw={"style": "width: 200px;"})
@@ -84,10 +88,12 @@ class PersonalInformationForm(Form):
     if_not_available = BooleanField(render_kw={"style": style_check})
     waitlist = BooleanField(render_kw={"style": style_check})
     allergies = StringField(render_kw={"style": "width: 300px;"})
-    how_long = StringField(render_kw={"style": "width: 300px;"})
+    how_long = StringField(render_kw={"style": "width: 300px;"},
+                           validators=[DataRequired()])
 
     #JS Magic
-    pet = BooleanField(render_kw={'onclick': "showStuff('has_pet')", "style": style_check})
+    pet = BooleanField(render_kw={'onclick': "showStuff('has_pet', ['pet_description', 'pet_needs')",
+                                  "style": style_check})
     pet_description = StringField(render_kw={"style": style_long})
     pet_needs = StringField(render_kw={"style": style_long})
     hear_about_us = SelectMultipleField(choices=["Radio", "Fb", "Craiglist", "Friend", "Other"],
@@ -97,11 +103,13 @@ class PersonalInformationForm(Form):
 
 
 class ShortEssayForm(Form):
-    question = TextAreaField(render_kw={"class": "essay", "rows": "12", "cols": "150"})
+    question = TextAreaField(render_kw={"class": "essay", "rows": "12", "cols": "150"},
+                           validators=[DataRequired()])
 
 
 class AutobiographicalForm(Form):
-    question = TextAreaField(render_kw={"class": "auto", "rows": "12", "cols": "150"})
+    question = TextAreaField(render_kw={"class": "auto", "rows": "12", "cols": "150"},
+                           validators=[DataRequired()])
 
 
 class Range(Form):
@@ -122,7 +130,5 @@ class References(Form):
     relationship = StringField(label="Relationship", render_kw={"class": "reference"})
     email = StringField(label="Email", validators=[DataRequired(), Email()], render_kw={"class": "reference"})
     phone = StringField('Phone', validators=[DataRequired()], render_kw={"class": "reference"})
-
-
     # submit = SubmitField(label="Shorten",
     #                  render_kw={"class": "btn btn-success"})
