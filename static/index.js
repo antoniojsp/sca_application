@@ -1,6 +1,6 @@
+//hides or show blocks with extra inputs in the page and changes attributes to those extra inputs from "required" input or back.
 function showStuff(element, attr_list) {
       var el = document.getElementById(element);
-
       if (el.style.display === "none") {
         el.style.display = "block";
         change_attr(attr_list, true);
@@ -8,6 +8,11 @@ function showStuff(element, attr_list) {
         el.style.display = "none";
         change_attr(attr_list, false);
       }
+};
+
+function highlight_input(input){
+    var elem = document.getElementById(input);
+    elem.style.background="yellow";
 };
 
 function change_attr(attr_list, new_attr){
@@ -18,22 +23,26 @@ function change_attr(attr_list, new_attr){
 };
 
 // for type of student section
-function hide_if_selected(selection, element_to_hide, if_selected){
+function hide_if_selected(selection, element_to_hide, if_selected, attr_list){
         var elem = document.getElementById(element_to_hide);
 
-        if(selection == if_selected){
-            elem.style.display = "None";
-        }else{
+        if(selection != if_selected){
             elem.style.display = "block";
+            change_attr(attr_list, true);
+        }else{
+            elem.style.display = "none";
+            change_attr(attr_list, false);
         }
     }
 //for where you hear from us section
-function show_if_selected(selection, element_to_show, if_selected){
+function show_if_selected(selection, element_to_show, if_selected, attr_list){
         var element = document.getElementById(element_to_show);
-        if(selection != if_selected){
-            element.style.display = "None";
-        }else{
+        if(selection == if_selected){
             element.style.display = "block";
+            change_attr(attr_list, true);
+        }else{
+            element.style.display = "none";
+            change_attr(attr_list, false);
         }
     }
 function current_date(){

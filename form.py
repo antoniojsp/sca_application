@@ -66,14 +66,16 @@ class PersonalInformationForm(Form):
 
     denied_membership = BooleanField(render_kw={"style": style_check})
 
-    member_terminated = BooleanField(render_kw={"onclick": "showStuff('was_boarder_terminated', ['member_terminated_explanation'])", "style": style_check})
+    # SHOW AND HIDE
+    member_terminated = BooleanField(render_kw={"onclick": "showStuff('was_boarder_terminated', ['member_terminated_explanation'])",
+                                                "style": style_check})
     member_terminated_explanation = TextAreaField(render_kw={"rows": "12", "cols": "150"})
 
+    # type of student
     type_student = SelectField(choices=["Non Student", "Undergrad", "Graduate", "Post-Baccalaureate"],
-                               render_kw={"onchange": "hide_if_selected(this.value, 'is_student', 'Non Student')",
+                               render_kw={"onchange": "hide_if_selected(this.value, 'is_student', 'Non Student', ['which_school', 'school_year', 'credits', 'major'])",
                                           "style": style_short},
                                validators=[DataRequired()])
-
     which_school = StringField(render_kw={"style": "width: 300px;"})
     school_year = IntegerField(render_kw={"style": style_short})
     credits = IntegerField(render_kw={"style": "width: 200px;"})
@@ -91,14 +93,15 @@ class PersonalInformationForm(Form):
     how_long = StringField(render_kw={"style": "width: 300px;"},
                            validators=[DataRequired()])
 
-    #JS Magic
+    # SHOW AND HIDE
     pet = BooleanField(render_kw={'onclick': "showStuff('has_pet', ['pet_description', 'pet_needs'])",
                                   "style": style_check})
     pet_description = StringField(render_kw={"style": style_long})
     pet_needs = StringField(render_kw={"style": style_long})
     hear_about_us = SelectMultipleField(choices=["Radio", "Fb", "Craiglist", "Friend", "Other"],
-                                        render_kw={"onclick": "show_if_selected(this.value, 'other_hear', 'Other')",
-                                                   "style": style_medium})
+                                        render_kw={"onclick": "show_if_selected(this.value, 'other_hear', 'Other', ['if_other_about_us'])",
+                                         "style": style_medium})
+
     if_other_about_us = StringField(render_kw={"style": style_long})
 
 
