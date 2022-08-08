@@ -104,7 +104,7 @@ $(document).ready ( function () {
         }
 
 
-           console.log(data_dict)
+           console.log(data_dict['form-control personal'])
 //        var cover = data_dict['cover']
 //
 //

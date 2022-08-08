@@ -92,7 +92,7 @@ class PersonalInformationForm(Form):
                            validators=[DataRequired()])
 
     #JS Magic
-    pet = BooleanField(render_kw={'onclick': "showStuff('has_pet', ['pet_description', 'pet_needs')",
+    pet = BooleanField(render_kw={'onclick': "showStuff('has_pet'), ['pet_description', 'pet_needs')",
                                   "style": style_check})
     pet_description = StringField(render_kw={"style": style_long})
     pet_needs = StringField(render_kw={"style": style_long})
