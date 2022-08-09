@@ -39,8 +39,8 @@ def _submit():
     import json
     out = json.loads(package)
     print(out)
-    db.insert(out)
-    return jsonify(result={"response": "hola"})
+    # db.insert(out)
+    return jsonify(result={"response": "200"})
 
 
 if __name__ == "__main__":

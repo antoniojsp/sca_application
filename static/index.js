@@ -9,20 +9,12 @@ function show_hide_extra_inputs(element, attr_list) {
         change_required_attributes(attr_list, false);
       }
 };
-
 function change_required_attributes(attr_list, new_attr){
         for (var i = 0; i < attr_list.length; i++){
             var el = document.getElementById(attr_list[i])
             el.required = new_attr;
     }
 };
-
-function highlight_input(input){
-    var elem = document.getElementById(input);
-    elem.style.background="yellow";
-};
-
-
 // for type of student section
 function hide_if_selected(selection, element_to_hide, if_selected, attr_list){
         var elem = document.getElementById(element_to_hide);
@@ -46,6 +38,27 @@ function show_if_selected(selection, element_to_show, if_selected, attr_list){
             change_required_attributes(attr_list, false);
         }
     }
+function highlight_missing_input(data_dict){
+
+    var is_data_missing = false
+    for( var i = 0; i<data_dict.length; i++){
+        if (data_dict[i][1] == false){
+            var elem = document.getElementById(data_dict[i][0]);
+            elem.style.background="yellow";
+            is_data_missing = true;
+        }
+    }
+
+    return is_data_missing
+};
+function clean_all_inputs(data_dict){
+    for( var i = 0; i<data_dict.length; i++){
+        var elem = document.getElementById(data_dict[i][0]);
+        elem.style.background="white";
+        elem.value= "";
+    }
+}
+
 function current_date(){
         var year = new Date().getYear() + 1900;
 
@@ -87,16 +100,16 @@ function check_inputs(data_dict){
             var input_value = data_dict[i][j][0]
             var is_required = data_dict[i][j][1]
             if (input_value == "" && is_required == true){
-                missing_input.push(j);
+                missing_input.push([j, false]);
+            }else{
+                missing_input.push([j, true]);
+
             }
         }
     };
 
     return missing_input
 };
-
-
-
 $(document).ready (function (){
 $(document).ready ( function () {
     $('.btnNext').click(function(){
@@ -114,24 +127,30 @@ $(document).ready ( function () {
     $('#submit_form').click(function(){
 
        var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
-//
         var data_dict = []
-
+        var submit_dictionary = {}
         for (var i = 0; i<classes.length; i++){
             data_dict.push(input_dict(classes[i]));
+            submit_dictionary[classes[i]] = input_dict(classes[i])
         }
 
         var missing_data = check_inputs(data_dict);
-        console.log(missing_data);
-//
-//        var submit_data = {"data":JSON.stringify(data_dict)}
 
-//            $.getJSON( "/_submit",
-//                submit_data,
-//                function(data) {
-//                console.log("Data sent")
-//                }
-//             );
+        if (highlight_missing_input(missing_data)){
+            console.log("vacio")
+            return
+        }
+
+        var submit_data = {"data":JSON.stringify(submit_dictionary)}
+
+            $.getJSON( "/_submit",
+                submit_data,
+                function(data) {
+                console.log("Data sent")
+                clean_all_inputs(missing_data)
+
+                }
+             );
     });
 });
 
