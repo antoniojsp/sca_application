@@ -66,8 +66,8 @@ class PersonalInformationForm(Form):
 
     # SHOW AND HIDE
     was_boarder = BooleanField(render_kw={"style": style_check,
-                                          'onclick': "show_hide_extra_inputs('was_boarder_checked',['years_boarder'])"})
-    years_boarder = IntegerField(render_kw={"min": "1920", "max": "2022", "style": style_short})
+                                          'onclick': "show_hide_extra_inputs('was_boarder_checked',['was_boarder_years'])"})
+    was_boarder_years = IntegerField(render_kw={"min": "1920", "max": "2022", "style": style_short})
 
     denied_membership = BooleanField(render_kw={"style": style_check})
 
@@ -139,6 +139,6 @@ class Range(Form):
 class References(Form):
     name = StringField(label="Name", render_kw={"class": "reference"})
     relationship = StringField(label="Relationship", render_kw={"class": "reference"})
-    email = StringField(label="Email", validators=[DataRequired(), Email()], render_kw={"class": "reference"})
-    phone = StringField('Phone', validators=[DataRequired()], render_kw={"class": "reference"})
+    email = StringField(label="Email", render_kw={"class": "reference"})
+    phone = StringField('Phone', render_kw={"class": "reference"})
 

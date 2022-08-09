@@ -80,15 +80,23 @@ function input_dict(name){
     return information_package
 };
 // checks if all the data needed us complete, if not, creates a string with the data missing
-function check_inputs(data_dict, tab, message){
-        for ( i in data_dict[tab]){
-            if (data_dict[tab][i] == ""){
-                return message + "\n"
-            };
-        };
+function check_inputs(data_dict){
+    var missing_input = []
+    for (var i = 0; i < data_dict.length; i++){
+        for (let j in data_dict[i]){
+            var input_value = data_dict[i][j][0]
+            var is_required = data_dict[i][j][1]
+            if (input_value == "" && is_required == true){
+                missing_input.push(j);
+            }
+        }
+    };
 
-        return ""
+    return missing_input
 };
+
+
+
 $(document).ready (function (){
 $(document).ready ( function () {
     $('.btnNext').click(function(){
@@ -107,34 +115,14 @@ $(document).ready ( function () {
 
        var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
 //
-        var data_dict = {}
+        var data_dict = []
 
         for (var i = 0; i<classes.length; i++){
-            data_dict[classes[i]] = input_dict(classes[i]);
+            data_dict.push(input_dict(classes[i]));
         }
 
-
-
-//        var cover = data_dict['cover']
-//
-//
-//        var alarma = "";
-//
-//        alarma += check_inputs(data_dict, classes[0], "Check cover page tab");
-//        alarma += check_inputs(data_dict, classes[1], "Check agreement tab");
-//
-//        var personal = data_dict['form-control personal'];
-//        console.log(personal.full_legal_name);
-//
-//
-//        alarma += check_inputs(data_dict, classes[4], "Check essay tab");
-//        alarma += check_inputs(data_dict, classes[5], "Check essay tab");
-//
-//
-//        if (alarma != ""){
-//            alert(alarma);
-//
-//        }
+        var missing_data = check_inputs(data_dict);
+        console.log(missing_data);
 //
 //        var submit_data = {"data":JSON.stringify(data_dict)}
 
