@@ -1,13 +1,20 @@
 //hides or show blocks with extra inputs in the page and changes attributes to those extra inputs from "required" input or back.
-function showStuff(element, attr_list) {
+function show_hide_extra_inputs(element, attr_list) {
       var el = document.getElementById(element);
       if (el.style.display === "none") {
         el.style.display = "block";
-        change_attr(attr_list, true);
+        change_required_attributes(attr_list, true);
       } else {
         el.style.display = "none";
-        change_attr(attr_list, false);
+        change_required_attributes(attr_list, false);
       }
+};
+
+function change_required_attributes(attr_list, new_attr){
+        for (var i = 0; i < attr_list.length; i++){
+            var el = document.getElementById(attr_list[i])
+            el.required = new_attr;
+    }
 };
 
 function highlight_input(input){
@@ -15,12 +22,6 @@ function highlight_input(input){
     elem.style.background="yellow";
 };
 
-function change_attr(attr_list, new_attr){
-        for (var i = 0; i < attr_list.length; i++){
-            var el = document.getElementById(attr_list[i])
-            el.required = new_attr;
-    }
-};
 
 // for type of student section
 function hide_if_selected(selection, element_to_hide, if_selected, attr_list){
@@ -28,10 +29,10 @@ function hide_if_selected(selection, element_to_hide, if_selected, attr_list){
 
         if(selection != if_selected){
             elem.style.display = "block";
-            change_attr(attr_list, true);
+            change_required_attributes(attr_list, true);
         }else{
             elem.style.display = "none";
-            change_attr(attr_list, false);
+            change_required_attributes(attr_list, false);
         }
     }
 //for where you hear from us section
@@ -39,10 +40,10 @@ function show_if_selected(selection, element_to_show, if_selected, attr_list){
         var element = document.getElementById(element_to_show);
         if(selection == if_selected){
             element.style.display = "block";
-            change_attr(attr_list, true);
+            change_required_attributes(attr_list, true);
         }else{
             element.style.display = "none";
-            change_attr(attr_list, false);
+            change_required_attributes(attr_list, false);
         }
     }
 function current_date(){
@@ -113,7 +114,7 @@ $(document).ready ( function () {
         }
 
 
-           console.log(data_dict['form-control personal'])
+
 //        var cover = data_dict['cover']
 //
 //
