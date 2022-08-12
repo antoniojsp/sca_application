@@ -8,9 +8,9 @@ from wtforms.validators import DataRequired, Length, Email
 
 class CoverForm(FlaskForm):
     full_name = StringField(validators=[DataRequired()],
-                            render_kw={'class': "cover", 'autocomplete': "off", "style": "width: 400px;"})
+                            render_kw={'class': "cover", 'autocomplete': "off", "style": "width: 400px;", "onclick": "clear_highlight(this)"})
     today_date = DateField(format='%m/%d/%y',
-                           render_kw={'autocomplete': "off", 'class': "cover"},
+                           render_kw={'autocomplete': "off", 'class': "cover",},
                            validators=[DataRequired()])
 
 
@@ -84,9 +84,9 @@ class PersonalInformationForm(Form):
                                                       "['which_school', 'school_year', 'credits', 'major'])",
                                           "style": style_short},
                                validators=[DataRequired()])
-    which_school = StringField(render_kw={"style": "width: 300px;"})
+    which_school = StringField(render_kw={"style": style_medium})
     school_year = IntegerField(render_kw={"style": style_short})
-    credits = IntegerField(render_kw={"style": "width: 200px;"})
+    credits = IntegerField(render_kw={"style": style_short})
     major = StringField(render_kw={"style": "width: 200px;"})
 
     house_preference = SelectField(choices=["None", "JS", "Lorax", "Campbell Club"],
@@ -97,8 +97,8 @@ class PersonalInformationForm(Form):
     house_no_available = BooleanField(render_kw={"style": style_check})
     if_not_available = BooleanField(render_kw={"style": style_check})
     waitlist = BooleanField(render_kw={"style": style_check})
-    allergies = StringField(render_kw={"style": "width: 300px;"})
-    how_long = StringField(render_kw={"style": "width: 300px;"},
+    allergies = StringField(render_kw={"style": style_medium})
+    how_long = StringField(render_kw={"style": style_medium},
                            validators=[DataRequired()])
 
     # SHOW AND HIDE

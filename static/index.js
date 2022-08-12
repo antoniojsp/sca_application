@@ -56,8 +56,20 @@ function clean_all_inputs(data_dict){
         var elem = document.getElementById(data_dict[i][0]);
         elem.style.background="white";
         elem.value= "";
+        elem.checked=false;
     }
 }
+
+function clear_highlight(elem){
+
+  elem.style.background="white";
+};
+
+
+function highlight_bar(){
+var elem = document.getElementById("coverpage-tab");
+    elem.style.background="yellow";
+};
 
 function current_date(){
         var year = new Date().getYear() + 1900;
@@ -133,11 +145,12 @@ $(document).ready ( function () {
             data_dict.push(input_dict(classes[i]));
             submit_dictionary[classes[i]] = input_dict(classes[i])
         }
+        highlight_bar()
 
         var missing_data = check_inputs(data_dict);
 
         if (highlight_missing_input(missing_data)){
-            console.log("vacio")
+            alert("Check pages, data is missing. ")
             return
         }
 
@@ -147,8 +160,7 @@ $(document).ready ( function () {
                 submit_data,
                 function(data) {
                 console.log("Data sent")
-                clean_all_inputs(missing_data)
-
+                 window.location.reload();
                 }
              );
     });
