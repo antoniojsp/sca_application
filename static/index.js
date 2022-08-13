@@ -43,31 +43,25 @@ function highlight_missing_input(data_dict){
     var is_data_missing = false
     for( var i = 0; i<data_dict.length; i++){
         if (data_dict[i][1] == false){
-            var elem = document.getElementById(data_dict[i][0]);
-            elem.style.background="yellow";
+            var elem_input = document.getElementById(data_dict[i][0]);
+            elem_input.style.background="yellow";
             is_data_missing = true;
+
+            var elem_bar = document.getElementById(data_dict[i][2]);
+            elem_bar.style.background="yellow";
         }
     }
 
     return is_data_missing
 };
-function clean_all_inputs(data_dict){
-    for( var i = 0; i<data_dict.length; i++){
-        var elem = document.getElementById(data_dict[i][0]);
-        elem.style.background="white";
-        elem.value= "";
-        elem.checked=false;
-    }
-}
 
 function clear_highlight(elem){
-
   elem.style.background="white";
 };
 
 
 function highlight_bar(){
-var elem = document.getElementById("coverpage-tab");
+    var elem = document.getElementById("coverpage-tab");
     elem.style.background="yellow";
 };
 
@@ -107,19 +101,24 @@ function input_dict(name){
 // checks if all the data needed us complete, if not, creates a string with the data missing
 function check_inputs(data_dict){
     var missing_input = []
+    var sections = ["coverpage-tab","agreement-tab","checklist-tab","personal-information-tab","short-essay-tab","autobiographical-tab",
+    "scale-tab", "references-tab"]
+    const mySet1 = new Set()
     for (var i = 0; i < data_dict.length; i++){
+
         for (let j in data_dict[i]){
             var input_value = data_dict[i][j][0]
             var is_required = data_dict[i][j][1]
             if (input_value == "" && is_required == true){
-                missing_input.push([j, false]);
+                mySet1.add(sections[i])
+                missing_input.push([j, false, sections[i]]);
             }else{
-                missing_input.push([j, true]);
+                missing_input.push([j, true, "None"]);
 
             }
         }
     };
-
+    console.log(mySet1)
     return missing_input
 };
 $(document).ready (function (){
@@ -136,33 +135,38 @@ $(document).ready ( function () {
     });
 
     });
-    $('#submit_form').click(function(){
 
-       var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
-        var data_dict = []
-        var submit_dictionary = {}
-        for (var i = 0; i<classes.length; i++){
-            data_dict.push(input_dict(classes[i]));
-            submit_dictionary[classes[i]] = input_dict(classes[i])
-        }
-        highlight_bar()
+$('#submit_form').click(function(){
 
-        var missing_data = check_inputs(data_dict);
+   var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
+   var sections = ["coverpage-tab","agreement-tab","checklist-tab","personal-information-tab","short-essay-tab","autobiographical-tab",
+    "scale-tab", "references-tab"]
+    var data_dict = []
+    var submit_dictionary = {}
+    for (var i = 0; i<classes.length; i++){
+        data_dict.push(input_dict(classes[i]));
+        submit_dictionary[sections[i]] = input_dict(classes[i])
+    }
 
-        if (highlight_missing_input(missing_data)){
-            alert("Check pages, data is missing. ")
-            return
-        }
+    console.log(submit_dictionary)
+    highlight_bar()
 
-        var submit_data = {"data":JSON.stringify(submit_dictionary)}
+    var missing_data = check_inputs(data_dict);
 
-            $.getJSON( "/_submit",
-                submit_data,
-                function(data) {
-                console.log("Data sent")
-                 window.location.reload();
-                }
-             );
+    if (highlight_missing_input(missing_data)){
+        alert("Check pages, data is missing. ")
+        return
+    }
+
+    var submit_data = {"data":JSON.stringify(submit_dictionary)}
+
+        $.getJSON( "/_submit",
+            submit_data,
+            function(data) {
+            console.log("Data sent")
+             window.location.reload();
+            }
+         );
     });
 });
 
