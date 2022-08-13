@@ -60,10 +60,10 @@ function clear_highlight(elem){
 };
 
 
-function highlight_bar(){
-    var elem = document.getElementById("coverpage-tab");
-    elem.style.background="yellow";
-};
+//function highlight_bar(){
+//    var elem = document.getElementById("coverpage-tab");
+//    elem.style.background="yellow";
+//};
 
 function current_date(){
         var year = new Date().getYear() + 1900;
@@ -149,7 +149,7 @@ $('#submit_form').click(function(){
     }
 
     console.log(submit_dictionary)
-    highlight_bar()
+//    highlight_bar()
 
     var missing_data = check_inputs(data_dict);
 

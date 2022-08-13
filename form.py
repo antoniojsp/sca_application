@@ -5,12 +5,11 @@ from wtforms import StringField,\
                     DateField, TextAreaField, IntegerRangeField, Form, SelectMultipleField
 from wtforms.validators import DataRequired, Length, Email
 
-
 class CoverForm(FlaskForm):
     full_name = StringField(validators=[DataRequired()],
                             render_kw={'class': "cover", 'autocomplete': "off", "style": "width: 400px;", "onclick": "clear_highlight(this)"})
     today_date = DateField(format='%m/%d/%y',
-                           render_kw={'autocomplete': "off", 'class': "cover",},
+                           render_kw={'autocomplete': "off", 'class': "cover", "onclick": "clear_highlight(this)"},
                            validators=[DataRequired()])
 
 
@@ -20,7 +19,7 @@ class AgreementForm(Form):
                                       "maxlength": "4",
                                       "style": "width: 60px;",
                                       "placeholder": "initials",
-                                      'class': 'agreement'})
+                                      'class': 'agreement', "onclick": "clear_highlight(this)"})
 
 
 class ChecklistForm(Form):
@@ -35,27 +34,27 @@ class PersonalInformationForm(Form):
     style_check = "width:15px;"
 
     full_legal_name = StringField(validators=[DataRequired()],
-                                  render_kw={"style": style_medium})
-    preferred_name = StringField(render_kw={"style": style_medium})
-    pronouns = StringField(render_kw={"style": style_short})
+                                  render_kw={"style": style_medium, "onclick": "clear_highlight(this)"})
+    preferred_name = StringField(render_kw={"style": style_medium, "onclick": "clear_highlight(this)"})
+    pronouns = StringField(render_kw={"style": style_short, "onclick": "clear_highlight(this)"})
 
     dob = DateField(format='%m/%d/%y',
                     validators=[DataRequired()],
                     render_kw={'autocomplete': "off",
-                               "style": style_short})
+                               "style": style_short, "onclick": "clear_highlight(this)"})
     email = StringField(render_kw={"placeholder": "example@mail.com",
                                    "type": "email",
-                                   "style": style_long},
+                                   "style": style_long, "onclick": "clear_highlight(this)"},
                         validators=[DataRequired()])
 
-    phone = IntegerField(validators=[DataRequired()], render_kw={"style": style_medium})
+    phone = IntegerField(validators=[DataRequired()], render_kw={"style": style_medium, "onclick": "clear_highlight(this)"})
 
     #TODO
     #Make easy to copy permanent address to current address if the user choose that.
     permanent_address = StringField(validators=[DataRequired()],
-                                    render_kw={"style": style_long})
+                                    render_kw={"style": style_long, "onclick": "clear_highlight(this)"})
     current_address = StringField(validators=[DataRequired()],
-                                  render_kw={"style": style_long})
+                                  render_kw={"style": style_long, "onclick": "clear_highlight(this)"})
 
     my_choices = [('1', 'Fall'), ('2', 'Spring'), ('3', 'Summer'), ('4', "Winter")]
     move_in_term = SelectMultipleField(choices=my_choices,
