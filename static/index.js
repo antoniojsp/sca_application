@@ -154,7 +154,7 @@ $('#submit_form').click(function(){
     var missing_data = check_inputs(data_dict);
 
     if (highlight_missing_input(missing_data)){
-        alert("Check pages, data is missing. ")
+        alert("Please, review the form. Pages with missing info are highlighted.")
         return
     }
 
