@@ -37,8 +37,8 @@ class PersonalInformationForm(Form):
     style_check = "width:15px;"
 
     full_legal_name = StringField(validators=[DataRequired()],
-                                  render_kw={"style": style_medium, "onclick": "clear_highlight(this)"})
-    preferred_name = StringField(render_kw={"style": style_medium, "onclick": "clear_highlight(this)"})
+                                  render_kw={"style": style_medium, "onclick": onclick_clear})
+    preferred_name = StringField(render_kw={"style": style_medium, "onclick": onclick_clear})
     pronouns = StringField(render_kw={"style": style_short, "onclick": onclick_clear})
 
     dob = DateField(format='%m/%d/%y',
@@ -47,7 +47,10 @@ class PersonalInformationForm(Form):
                                "style": style_short, "onclick": onclick_clear})
     email = StringField(render_kw={"placeholder": "example@mail.com",
                                    "type": "email",
-                                   "style": style_long, "onclick": onclick_clear},
+                                   "style": style_long,
+                                   "onclick": onclick_clear,
+                                   "onkeyup": "if_email_valid(this, '#valid_email')"
+                              },
                         validators=[DataRequired()])
 
     phone = IntegerField(validators=[DataRequired()], render_kw={"style": style_medium, "onclick": onclick_clear})
@@ -139,9 +142,17 @@ class Range(Form):
 
 
 class References(Form):
-    name = StringField(label="Name", render_kw={"class": "reference"})
-    relationship = StringField(label="Relationship", render_kw={"class": "reference"})
-    email = StringField(label="Email", render_kw={"class": "reference"})
-    phone = StringField('Phone', render_kw={"class": "reference"})
+    name = StringField(label="Name",
+                       render_kw={"class": "reference", "onclick": onclick_clear},
+                       validators=[DataRequired()])
+    relationship = StringField(label="Relationship",
+                               render_kw={"class": "reference", "onclick": onclick_clear},
+                               validators=[DataRequired()])
+    email = StringField(label="Email",
+                        render_kw={"class": "reference", "onclick": onclick_clear},
+                        validators=[DataRequired()])
+    phone = StringField(label='Phone',
+                        render_kw={"class": "reference", "onclick": onclick_clear},
+                        validators=[DataRequired()])
 
 

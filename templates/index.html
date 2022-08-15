@@ -205,6 +205,7 @@ DEPOSIT UPON MOVE IN.</strong><br>
     <div class="form-group">
         Email<small>(*)</small>
         {{ form.personal.email(class_="form-control personal") }}
+        <div id="valid_email"></div>
 
          Personal Phone<small>(*)</small>
          {{ form.personal.phone(class_="form-control personal") }}
@@ -457,18 +458,23 @@ DEPOSIT UPON MOVE IN.</strong><br>
   </p>
 
 
-    {% for i in range(1,4) %}
-        <h4> Reference {{ i }}</h4>
+    {% for i in range(3) %}
+
+        {% set refer = 'refe'~loop.index %}
+
+        <h4> Reference {{ loop.index }}</h4>
         {{ form.reference.name.label }}
         {{ form.reference.name(id="ref" ~ loop.index) }}
         {{ form.reference.relationship.label }}
         {{ form.reference.relationship(id="rela" ~ loop.index) }}
         <br>
         {{ form.reference.email.label }}
-        {{ form.reference.email(id="email" ~ loop.index) }}
+        {{ form.reference.email( id="email" ~ loop.index, onkeyup="if_email_valid(this," ~ refer ~ " )" ) }}
+        <div id={{ refer }}> </div>
         {{ form.reference.phone.label }}
         {{ form.reference.phone(id="phone" ~ loop.index) }}
         <br>
+
     {% endfor %}
 
     <a class="btn btn-primary btnPrevious">Previous</a>

@@ -16,6 +16,21 @@ function change_required_attributes(attr_list, new_attr){
     }
 };
 
+function valid_email(input){
+    var re = /\S+@\S+\.\S+/;
+    return re.test(input);
+}
+
+function if_email_valid(input, response){
+    var email = input.value;
+    if (valid_email(email) || email == ""){
+        $(response).text("")
+    }else{
+        $(response).text("This email is not legal.")
+    }
+
+}
+
 function hide_if_selected(selection, element_to_hide, if_selected, attr_list){
 // if certain option (selection)is selected (if_selected) then all the elements in the attr_list are hidden and vice versa
         var elem = document.getElementById(element_to_hide);

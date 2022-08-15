@@ -4,7 +4,6 @@ import pymongo
 from datetime import timezone, datetime
 from random import randrange
 import os
-# db = PetiteUrlDatabase(os.environ['URI'])
 
 class Database:
     def __init__(self):
