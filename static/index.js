@@ -15,8 +15,9 @@ function change_required_attributes(attr_list, new_attr){
             el.required = new_attr;
     }
 };
-// for type of student section
+
 function hide_if_selected(selection, element_to_hide, if_selected, attr_list){
+// if certain option (selection)is selected (if_selected) then all the elements in the attr_list are hidden and vice versa
         var elem = document.getElementById(element_to_hide);
 
         if(selection != if_selected){
@@ -29,6 +30,8 @@ function hide_if_selected(selection, element_to_hide, if_selected, attr_list){
     }
 //for where you hear from us section
 function show_if_selected(selection, element_to_show, if_selected, attr_list){
+// if certain option (selection) is selected (if_selected) then all the elements in the attr_list are shown and vice versa
+
         var element = document.getElementById(element_to_show);
         if(selection == if_selected){
             element.style.display = "block";
