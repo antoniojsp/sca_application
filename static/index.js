@@ -83,8 +83,9 @@ function if_email_valid(input, response){
     var year = new Date();
     const diffTime = Math.abs(year - dob);
     const diffYears= Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
+    console.log(diffYears)
 
-    if (diffTime > 18){
+    if (diffYears > 18){
         return false
     }
 
@@ -93,11 +94,11 @@ function if_email_valid(input, response){
 
 function if_not_underage(input, response){
     var age = input.value;
-    console.log(response)
+    console.log(prevent_underage_app(age))
     if (prevent_underage_app(age)){
-        $(response).text("")
-    }else{
         $(response).text("You are underage. Please, ask the office if you can apply.")
+    }else{
+        $(response).text("")
     };
 };
 
