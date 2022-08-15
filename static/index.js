@@ -15,22 +15,6 @@ function change_required_attributes(attr_list, new_attr){
             el.required = new_attr;
     }
 };
-
-function valid_email(input){
-    var re = /\S+@\S+\.\S+/;
-    return re.test(input);
-}
-
-function if_email_valid(input, response){
-    var email = input.value;
-    if (valid_email(email) || email == ""){
-        $(response).text("")
-    }else{
-        $(response).text("This email is not legal.")
-    }
-
-}
-
 function hide_if_selected(selection, element_to_hide, if_selected, attr_list){
 // if certain option (selection)is selected (if_selected) then all the elements in the attr_list are hidden and vice versa
         var elem = document.getElementById(element_to_hide);
@@ -56,6 +40,7 @@ function show_if_selected(selection, element_to_show, if_selected, attr_list){
             change_required_attributes(attr_list, false);
         }
     }
+
 function highlight_missing_input(data_dict){
 
     var is_data_missing = false
@@ -77,11 +62,45 @@ function clear_highlight(elem){
   elem.style.background="white";
 };
 
+// checks if emails are valid. Display warning message if it's not valid. It also return false and can prevent submiting data if email is note legal
+function valid_email(input){
+    var re = /\S+@\S+\.\S+/;
+    return re.test(input);
+}
+function if_email_valid(input, response){
+    var email = input.value;
+    if (valid_email(email) || email == ""){
+        $(response).text("")
+    }else{
+        $(response).text("This email is not legal.")
+    };
+};
 
-//function highlight_bar(){
-//    var elem = document.getElementById("coverpage-tab");
-//    elem.style.background="yellow";
-//};
+
+// needs work for leap years
+ function prevent_underage_app(age){
+    var dob = new Date(age)
+    var year = new Date();
+    const diffTime = Math.abs(year - dob);
+    const diffYears= Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
+
+    if (diffTime > 18){
+        return false
+    }
+
+    return true
+ };
+
+function if_not_underage(input, response){
+    var age = input.value;
+    console.log(response)
+    if (prevent_underage_app(age)){
+        $(response).text("")
+    }else{
+        $(response).text("You are underage. Please, ask the office if you can apply.")
+    };
+};
+
 
 function current_date(){
         var year = new Date().getYear() + 1900;
@@ -167,7 +186,6 @@ $('#submit_form').click(function(){
     }
 
     console.log(submit_dictionary)
-//    highlight_bar()
 
     var missing_data = check_inputs(data_dict);
 

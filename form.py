@@ -44,7 +44,9 @@ class PersonalInformationForm(Form):
     dob = DateField(format='%m/%d/%y',
                     validators=[DataRequired()],
                     render_kw={'autocomplete': "off",
-                               "style": style_short, "onclick": onclick_clear})
+                               "style": style_short,
+                               "onchange": onclick_clear + ",if_not_underage(this, '#is_underage')",
+                               })
     email = StringField(render_kw={"placeholder": "example@mail.com",
                                    "type": "email",
                                    "style": style_long,
