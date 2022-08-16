@@ -1,11 +1,11 @@
 // hide and show elements functions/
 function show_hide_extra_inputs(element, attr_list) {
-      var el = document.getElementById(element);
-      if (el.style.display === "none") {
-        el.style.display = "block";
+      var element_display = document.getElementById(element);
+      if (element_display.style.display === "none") {
+        element_display.style.display = "block";
         change_required_attributes(attr_list, true);
       } else {
-        el.style.display = "none";
+        element_display.style.display = "none";
         change_required_attributes(attr_list, false);
       }
 };
@@ -41,6 +41,15 @@ function show_if_selected(selection, element_to_show, if_selected, attr_list){
     }
 
 
+//copy text from input to another
+function copy_input(input, from, to){
+    if (input.checked){
+         $(to).val($(from).val());
+    }else{
+         $(to).val("");
+    }
+};
+
 // highlight and clear inputs  depending if they are missing or not
 function highlight_missing_input(data_dict){
 
@@ -66,7 +75,7 @@ function clear_highlight(elem){
 function valid_email(input){
     var re = /\S+@\S+\.\S+/;
     return re.test(input);
-}
+};
 function if_email_valid(input, response){
     var email = input.value;
     if (valid_email(email) || email == ""){
@@ -76,19 +85,19 @@ function if_email_valid(input, response){
     };
 };
 
-
 // checks if applicant is at least 18 years old.
-function get_min_date(min_age){
-  var min_date = new Date();
-  min_date.setFullYear(min_date.getFullYear() - min_age);
-  return min_date
+// returns the closest date of birth for the applicant to be legal age
+function dob_legal_age(legal_age){
+  var soonest_date = new Date();
+  soonest_date.setFullYear(soonest_date.getFullYear() - legal_age);
+  return soonest_date
 };
-function check_if_underage(input){
+function is_underage(input){
     var dob = new Date(input.value);
-    if (dob < get_min_date(18)){
-        $('#is_underage').text("")
+    if (dob > dob_legal_age(18)){
+        $('#is_underage').text("You need to  be at least 18 years of age to apply. Please, call the office before sending the application.")
     }else{
-        $('#is_underage').text("You need to  be at least 18 to apply. Please, call the office before sending the application.")
+        $('#is_underage').text("")
     }
 }
 
@@ -107,15 +116,13 @@ function current_date(){
            "value" : date
         });
 
-        // leave the dob empty to force user to add it manually.
-        var min_date = get_min_date(18).toISOString().split('T')[0];
+        // leave the dob empty to force user to add it manually. CHeck with client if underage may apply in some circunstances
+        var min_date = dob_legal_age(18).toISOString().split('T')[0];
         $("#dob").attr({
            "max" : date
         });
-
-
-
 };
+
 // creates dictionary that needs to be checked by js it is legal before being sent to the backend
 function input_dict(name){
     var information_package = {}
@@ -151,35 +158,48 @@ function check_inputs(data_dict){
             }
         }
     };
-    console.log(mySet1)
     return missing_input
 };
-
-
 
 $(document).ready (function (){
 $('#submit_form').click(function(){
 
    var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
-   var sections = ["coverpage-tab","agreement-tab","checklist-tab","personal-information-tab","short-essay-tab","autobiographical-tab",
-    "scale-tab", "references-tab"]
-    var data_dict = []
-    var submit_dictionary = {}
+//   var sections = ["coverpage-tab","agreement-tab","checklist-tab","personal-information-tab","short-essay-tab","autobiographical-tab",
+//    "scale-tab", "references-tab"]
+    var dict_check_complete = []
+//    var dict_submit_server = {}
     for (var i = 0; i<classes.length; i++){
-        data_dict.push(input_dict(classes[i]));
-        submit_dictionary[sections[i]] = input_dict(classes[i])
+        dict_check_complete.push(input_dict(classes[i]));
+//        dict_submit_server[sections[i]] = input_dict(classes[i])
     }
 
-    console.log(submit_dictionary)
+    console.log(dict_check_complete)
+    var missing_data = check_inputs(dict_check_complete);
 
-    var missing_data = check_inputs(data_dict);
+
+    //TODO
+    var dob = new Date($("#dob").val());
+    if (dob < get_min_date(18)){
+        console.log("mayor")
+    }else{
+        console.log("Menor")
+    }
+
 
     if (highlight_missing_input(missing_data)){
         alert("Please, review the form. Pages with missing info are highlighted.")
         return
     }
 
-    var submit_data = {"data":JSON.stringify(submit_dictionary)}
+    if (get_min_date(18)){
+       alert("Please, review your DOB. If you are underage, please contact the office.")
+       return
+    }
+
+
+
+    var submit_data = {"data":JSON.stringify(dict_check_complete)}
 
         $.getJSON( "/_submit",
             submit_data,

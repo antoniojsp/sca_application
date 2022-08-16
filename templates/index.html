@@ -214,14 +214,16 @@ DEPOSIT UPON MOVE IN.</strong><br>
 
      
     <div class="form-group">
-        Address<small>(*)</small>
+        Permanent Address<small>(*)</small>
         {{ form.personal.permanent_address(class_="form-control personal") }}
     </div>
 
-     
     <div class="form-group">
         Current Address<small>(*)</small>
         {{ form.personal.current_address(class_="form-control personal") }}
+
+        Current Address same than permanent address?
+        {{ form.personal.same_address }}
      </div>
 
      

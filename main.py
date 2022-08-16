@@ -4,10 +4,11 @@ from form import CoverForm, AgreementForm, \
                  ShortEssayForm, AutobiographicalForm, \
                  References, Range
 from database import *
+import os
 
 app = Flask(__name__)
 
-app.secret_key = "maria"
+app.secret_key = os.environ['SECRET_WORD']
 db = Database()
 
 @app.route('/')
