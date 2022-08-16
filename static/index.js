@@ -151,6 +151,27 @@ function input_dict(name){
     }
     return information_package
 };
+
+
+//function input_dict(name){
+//    var information_package = {}
+//    var cover = document.getElementsByClassName(name);
+//     var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
+//
+//    for (let j = 0; j < classes.length; j++){
+//        for (let i = 0; i < cover.length; i++) {
+//
+//              if (cover[i].type == "checkbox"){
+//                information_package[cover[i].id] = cover[i].checked
+//              }else{
+//                information_package[cover[i].id] = cover[i].value
+//              };
+//        };
+//
+//    };
+//    return information_package
+//};
+
 // checks if all the data needed us complete, if not, creates a string with the data missing
 function check_inputs(data_dict){
     var missing_input = []
@@ -173,6 +194,7 @@ function check_inputs(data_dict){
     };
     return missing_input
 };
+
 
 $(document).ready (function (){
 $('#submit_form').click(function(){
