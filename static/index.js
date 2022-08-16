@@ -50,6 +50,18 @@ function copy_input(input, from, to){
     }
 };
 
+function check_initials(){
+    var inputs = $(".agreement");
+    var is_equal = true;
+    var first_element = inputs[0].value
+    for(var i = 1; i < inputs.length; i++){
+        if (first_element != inputs[i].value || inputs[i].value == ""){
+            is_equal = false
+        }
+    };
+    return is_equal
+};
+
 // highlight and clear inputs  depending if they are missing or not
 function highlight_missing_input(data_dict){
 
@@ -67,6 +79,7 @@ function highlight_missing_input(data_dict){
 
     return is_data_missing
 };
+
 function clear_highlight(elem){
   elem.style.background="white";
 };
@@ -141,7 +154,7 @@ function input_dict(name){
 // checks if all the data needed us complete, if not, creates a string with the data missing
 function check_inputs(data_dict){
     var missing_input = []
-    var sections = ["coverpage-tab","agreement-tab","checklist-tab","personal-information-tab","short-essay-tab","autobiographical-tab",
+    var sections = ["coverpage-tab", "agreement-tab", "checklist-tab", "personal-information-tab", "short-essay-tab", "autobiographical-tab",
     "scale-tab", "references-tab"]
     const mySet1 = new Set()
     for (var i = 0; i < data_dict.length; i++){
@@ -164,40 +177,31 @@ function check_inputs(data_dict){
 $(document).ready (function (){
 $('#submit_form').click(function(){
 
-   var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
-//   var sections = ["coverpage-tab","agreement-tab","checklist-tab","personal-information-tab","short-essay-tab","autobiographical-tab",
-//    "scale-tab", "references-tab"]
+    var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
     var dict_check_complete = []
-//    var dict_submit_server = {}
     for (var i = 0; i<classes.length; i++){
         dict_check_complete.push(input_dict(classes[i]));
-//        dict_submit_server[sections[i]] = input_dict(classes[i])
     }
 
-    console.log(dict_check_complete)
     var missing_data = check_inputs(dict_check_complete);
 
-
-    //TODO
     var dob = new Date($("#dob").val());
-    if (dob < get_min_date(18)){
-        console.log("mayor")
-    }else{
-        console.log("Menor")
+    if (dob > dob_legal_age(18)){
+       alert("Please, review your DOB. If you are underage, please contact the office.")
+       return
     }
-
 
     if (highlight_missing_input(missing_data)){
         alert("Please, review the form. Pages with missing info are highlighted.")
         return
     }
 
-    if (get_min_date(18)){
-       alert("Please, review your DOB. If you are underage, please contact the office.")
+    if (!check_initials()){
+       alert("Please, check your initials. All of them need to match.")
+       var elem_bar = document.getElementById("agreement-tab");
+        elem_bar.style.background="yellow";
        return
     }
-
-
 
     var submit_data = {"data":JSON.stringify(dict_check_complete)}
 
