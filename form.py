@@ -153,7 +153,7 @@ class References(Form):
     email = StringField(label="Email",
                         render_kw={"class": "reference", "onclick": onclick_clear},
                         validators=[DataRequired()])
-    phone = StringField(label='Phone',
+    phone = IntegerField(label='Phone',
                         render_kw={"class": "reference", "onclick": onclick_clear},
                         validators=[DataRequired()])
 

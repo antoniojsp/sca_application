@@ -1,4 +1,4 @@
-//hides or show blocks with extra inputs in the page and changes attributes to those extra inputs from "required" input or back.
+// hide and show elements functions/
 function show_hide_extra_inputs(element, attr_list) {
       var el = document.getElementById(element);
       if (el.style.display === "none") {
@@ -27,7 +27,6 @@ function hide_if_selected(selection, element_to_hide, if_selected, attr_list){
             change_required_attributes(attr_list, false);
         }
     }
-//for where you hear from us section
 function show_if_selected(selection, element_to_show, if_selected, attr_list){
 // if certain option (selection) is selected (if_selected) then all the elements in the attr_list are shown and vice versa
 
@@ -41,6 +40,8 @@ function show_if_selected(selection, element_to_show, if_selected, attr_list){
         }
     }
 
+
+// highlight and clear inputs  depending if they are missing or not
 function highlight_missing_input(data_dict){
 
     var is_data_missing = false
@@ -57,7 +58,6 @@ function highlight_missing_input(data_dict){
 
     return is_data_missing
 };
-
 function clear_highlight(elem){
   elem.style.background="white";
 };
@@ -77,7 +77,7 @@ function if_email_valid(input, response){
 };
 
 
-// needs work for leap years
+// checks if applicant is at least 18 years old.
 function get_min_date(min_age){
   var min_date = new Date();
   min_date.setFullYear(min_date.getFullYear() - min_age);
@@ -95,6 +95,7 @@ function check_if_underage(input){
 function current_date(){
         var year = new Date().getYear() + 1900;
 
+        // set the move_in_year to this one, at least
         $("#move_in_year").attr({
            "min" : year,
            "value" : year
@@ -106,17 +107,15 @@ function current_date(){
            "value" : date
         });
 
-//        var min_date = new Date().toISOString().split('T')[0];
+        // leave the dob empty to force user to add it manually.
         var min_date = get_min_date(18).toISOString().split('T')[0];
         $("#dob").attr({
-           "max" : date,
-           "value" : min_date
+           "max" : date
         });
 
 
 
 };
-// Previous and Next buttons
 // creates dictionary that needs to be checked by js it is legal before being sent to the backend
 function input_dict(name){
     var information_package = {}
@@ -130,7 +129,6 @@ function input_dict(name){
         information_package[cover[i].id] = [cover[i].value, cover[i].required]
       }
     }
-
     return information_package
 };
 // checks if all the data needed us complete, if not, creates a string with the data missing
@@ -156,21 +154,10 @@ function check_inputs(data_dict){
     console.log(mySet1)
     return missing_input
 };
+
+
+
 $(document).ready (function (){
-$(document).ready ( function () {
-    $('.btnNext').click(function(){
-        console.log($('.nav-tabs > .active').next('li').find('a'))
-      $('.nav-tabs > .nav-item > .active').parent().next('li').find('a').trigger('click');
-    });
-
-
-     $('.btnPrevious').click(function(){
-     console.log("dfd")
-      $('.nav-tabs > .nav-item > .active').parent().prev('li').find('a').trigger('click');
-    });
-
-    });
-
 $('#submit_form').click(function(){
 
    var classes = ['cover', 'agreement', "checklist", 'form-control personal', "essay", "auto", "range", "reference"]
@@ -205,3 +192,14 @@ $('#submit_form').click(function(){
 });
 
 
+// next and prev buttons
+$(document).ready ( function () {
+    $('.btnNext').click(function(){
+        console.log($('.nav-tabs > .active').next('li').find('a'))
+      $('.nav-tabs > .nav-item > .active').parent().next('li').find('a').trigger('click');
+    });
+     $('.btnPrevious').click(function(){
+     console.log("dfd")
+      $('.nav-tabs > .nav-item > .active').parent().prev('li').find('a').trigger('click');
+    });
+});
