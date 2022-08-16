@@ -78,47 +78,44 @@ function if_email_valid(input, response){
 
 
 // needs work for leap years
- function prevent_underage_app(age){
-    var dob = new Date(age)
-    var year = new Date();
-    const diffTime = Math.abs(year - dob);
-    const diffYears= Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
-    console.log(diffYears)
-
-    if (diffYears > 18){
-        return false
-    }
-
-    return true
- };
-
-function if_not_underage(input, response){
-    var age = input.value;
-    console.log(prevent_underage_app(age))
-    if (prevent_underage_app(age)){
-        $(response).text("You are underage. Please, ask the office if you can apply.")
-    }else{
-        $(response).text("")
-    };
+function get_min_date(min_age){
+  var min_date = new Date();
+  min_date.setFullYear(min_date.getFullYear() - min_age);
+  return min_date
 };
-
+function check_if_underage(input){
+    var dob = new Date(input.value);
+    if (dob < get_min_date(18)){
+        $('#is_underage').text("")
+    }else{
+        $('#is_underage').text("You need to  be at least 18 to apply. Please, call the office before sending the application.")
+    }
+}
 
 function current_date(){
         var year = new Date().getYear() + 1900;
 
         $("#move_in_year").attr({
-           "min" : year,        // substitute your own
-           "value" : year          // values (or variables) here
+           "min" : year,
+           "value" : year
         });
 
         var date = new Date().toISOString().split('T')[0];
         $("#today_date").attr({
-           "min" : date,        // substitute your own
-           "value" : date          // values (or variables) here
+           "min" : date,
+           "value" : date
+        });
+
+//        var min_date = new Date().toISOString().split('T')[0];
+        var min_date = get_min_date(18).toISOString().split('T')[0];
+        $("#dob").attr({
+           "max" : date,
+           "value" : min_date
         });
 
 
-    };
+
+};
 // Previous and Next buttons
 // creates dictionary that needs to be checked by js it is legal before being sent to the backend
 function input_dict(name){

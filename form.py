@@ -45,7 +45,7 @@ class PersonalInformationForm(Form):
                     validators=[DataRequired()],
                     render_kw={'autocomplete': "off",
                                "style": style_short,
-                               "onchange": onclick_clear + ",if_not_underage(this, '#is_underage')",
+                               "onchange": onclick_clear + ",check_if_underage(this)",
                                })
     email = StringField(render_kw={"placeholder": "example@mail.com",
                                    "type": "email",
